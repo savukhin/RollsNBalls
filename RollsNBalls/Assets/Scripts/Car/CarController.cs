@@ -12,19 +12,11 @@ public enum sideEnum
 public class CarController : MonoBehaviour
 {
     public GameObject model;
-    public int speed = 1;
+    public float moveSpeed = 2.4f;
     private Vector2 touchPosition;
     private int side;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        side = (int)sideEnum.Middle;
-        model.transform.position = new Vector3(side, model.transform.position.y, model.transform.position.z);
-    }
-
-    // Update is called once per frame
-    void Update()
+    void SlideProcessing() 
     {
         if (Input.GetMouseButtonDown(0)) {
             touchPosition = Input.mousePosition;
@@ -44,5 +36,25 @@ public class CarController : MonoBehaviour
                 model.transform.position = new Vector3(side, model.transform.position.y, model.transform.position.z);
             }
         }
+    }
+
+    void MoveForward() 
+    {
+        Vector3 direction = new Vector3(0, 0, 1);
+        transform.position += direction * moveSpeed * Time.deltaTime;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        side = (int)sideEnum.Middle;
+        model.transform.position = new Vector3(side, model.transform.position.y, model.transform.position.z);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        SlideProcessing();
+        MoveForward();
     }
 }
