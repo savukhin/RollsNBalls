@@ -15,6 +15,29 @@ public class CarController : MonoBehaviour
     public float moveSpeed = 2.4f;
     private Vector2 touchPosition;
     private int side;
+    private bool moving = false;
+
+    IEnumerator changeLine(bool left) {
+        moving = true;
+        if (left)
+        {
+            for (int i = 2; i < 33; i = (i << 1))
+            {
+                model.transform.position -= new Vector3(2.0f / i, 0, 0);
+                yield return new WaitForSeconds(0.001f);
+            }            
+        } else
+        {
+            for (int i = 2; i < 33; i = (i << 1))
+            {
+                model.transform.position += new Vector3(2.0f / i, 0, 0);
+                yield return new WaitForSeconds(0.001f);
+            }            
+        }
+        model.transform.position = new Vector3(side, model.transform.position.y, model.transform.position.z);
+        moving = false;
+        yield return null;        
+    }
 
     void SlideProcessing() 
     {
@@ -25,15 +48,18 @@ public class CarController : MonoBehaviour
         {
             Vector3 mousePosition = Input.mousePosition;
             Vector2 deltaSwipe = touchPosition - new Vector2(mousePosition.x, mousePosition.y);
-            if (Mathf.Abs(deltaSwipe.x) > 50.0f) 
+            if (Mathf.Abs(deltaSwipe.x) > 50.0f && !moving)
             {
                 side = side + (deltaSwipe.x < 0 ? 2 : -2);
+
                 if (side < -2)
                     side = -2;
                 if (side > 2)
                     side = 2;
+                else
+                    StartCoroutine("changeLine", deltaSwipe.x > 0);
                 
-                model.transform.position = new Vector3(side, model.transform.position.y, model.transform.position.z);
+                //model.transform.position = new Vector3(side, model.transform.position.y, model.transform.position.z);
             }
         }
     }
