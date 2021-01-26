@@ -8,10 +8,15 @@ public class mapGeneration : MonoBehaviour
     public GameObject currentStage;
     private GameObject nextStage;
     public float speed = 4f;
+    public bool pause = false;
 
     public void stop()
     {
-        speed = 0f;
+        pause = true;
+    }
+
+    public void resume() {
+        pause = false;
     }
 
     float getStageSize(GameObject stage) {
@@ -43,6 +48,7 @@ public class mapGeneration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveForward();        
+        if (!pause)
+            moveForward();        
     }
 }
