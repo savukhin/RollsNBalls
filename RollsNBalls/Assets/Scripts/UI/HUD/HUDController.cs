@@ -12,7 +12,7 @@ public class HUDController : MonoBehaviour
         HPText.text = healthPoints.ToString();
     }
 
-    public void updateMoney(int money) {
+    public void updateMoneyPoints(int money) {
         MoneyText.text = money.ToString();
     }
 }

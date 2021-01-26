@@ -5,10 +5,19 @@ using UnityEngine;
 public class mapGeneration : MonoBehaviour
 {
     public GameObject[] carStagesPrefabs;
-    public GameObject currentStage;
+    public GameObject startStagePrefab;
+    private GameObject currentStage;
     private GameObject nextStage;
     public float speed = 4f;
-    public bool pause = false;
+    [System.NonSerialized]
+    public bool pause = true;
+
+    public void restart() {
+        Destroy(currentStage);
+        Destroy(nextStage);
+        //currentStage = Instantiate(startStagePrefab, new Vector3(0, 0, 10), startStagePrefab.transform.rotation);
+        Start();
+    }
 
     public void stop()
     {
@@ -42,6 +51,7 @@ public class mapGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentStage = Instantiate(startStagePrefab, new Vector3(0, 0, 10), startStagePrefab.transform.rotation);
         generateRandomStage();
     }
 
