@@ -15,8 +15,16 @@ public class CarController : MonoBehaviour
     private Vector2 touchPosition;
     private int side;
     private bool moving = false;
+    public int healthPoints = 3;
+    public generalWorld world;
 
-    IEnumerator changeLine(bool left) {
+    private void gameOver()
+    {
+        world.gameOver();
+    }
+
+    IEnumerator changeLine(bool left)
+    {
         moving = true;
         if (left)
         {
@@ -38,7 +46,7 @@ public class CarController : MonoBehaviour
         yield return null;        
     }
 
-    void SlideProcessing() 
+    void slideProcessing() 
     {
         if (Input.GetMouseButtonDown(0)) {
             touchPosition = Input.mousePosition;
@@ -62,6 +70,16 @@ public class CarController : MonoBehaviour
         }
     }
 
+    //void OnCollisionEnter(Collision collision)
+    public void takeDamage(int damage=1)
+    {
+        healthPoints -= damage;
+        if (healthPoints <= 0)
+        {
+            gameOver();
+        }
+	}
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +90,6 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SlideProcessing();
+        slideProcessing();
     }
 }

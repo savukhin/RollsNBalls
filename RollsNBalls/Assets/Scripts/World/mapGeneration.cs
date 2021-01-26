@@ -9,6 +9,11 @@ public class mapGeneration : MonoBehaviour
     private GameObject nextStage;
     public float speed = 4f;
 
+    public void stop()
+    {
+        speed = 0f;
+    }
+
     float getStageSize(GameObject stage) {
         return stage.transform.localScale.z * stage.GetComponent<Collider>().bounds.size.z;
     }
