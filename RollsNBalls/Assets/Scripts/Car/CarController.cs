@@ -12,6 +12,7 @@ public enum sideEnum
 public class CarController : MonoBehaviour
 {
     public GameObject model;
+    public HUDController HUD;
     private Vector2 touchPosition;
     private int side;
     private bool moving = false;
@@ -74,10 +75,9 @@ public class CarController : MonoBehaviour
     public void takeDamage(int damage=1)
     {
         healthPoints -= damage;
+        HUD.updateHealthPoints(healthPoints);
         if (healthPoints <= 0)
-        {
             gameOver();
-        }
 	}
     
     // Start is called before the first frame update
