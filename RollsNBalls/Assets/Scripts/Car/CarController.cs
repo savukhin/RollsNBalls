@@ -12,7 +12,6 @@ public enum sideEnum
 public class CarController : MonoBehaviour
 {
     public GameObject model;
-    public float moveSpeed = 2.4f;
     private Vector2 touchPosition;
     private int side;
     private bool moving = false;
@@ -54,20 +53,13 @@ public class CarController : MonoBehaviour
 
                 if (side < -2)
                     side = -2;
-                if (side > 2)
+                else if (side > 2)
                     side = 2;
                 else
                     StartCoroutine("changeLine", deltaSwipe.x > 0);
-                
-                //model.transform.position = new Vector3(side, model.transform.position.y, model.transform.position.z);
+
             }
         }
-    }
-
-    void MoveForward() 
-    {
-        Vector3 direction = new Vector3(0, 0, 1);
-        transform.position += direction * moveSpeed * Time.deltaTime;
     }
 
     // Start is called before the first frame update
@@ -81,6 +73,5 @@ public class CarController : MonoBehaviour
     void Update()
     {
         SlideProcessing();
-        MoveForward();
     }
 }
