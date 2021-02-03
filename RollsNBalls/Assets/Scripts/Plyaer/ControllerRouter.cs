@@ -7,14 +7,27 @@ public class ControllerRouter : MonoBehaviour
     private gameModesEnum gameMode = gameModesEnum.Ball;
     public CarController car;
     public BallController ball;
+    private Vector3 ballPausedVelocity = new Vector3(0, 0, 0);
+    private Vector3 ballPausedAngularVelocity = new Vector3(0, 0, 0);
 
     public void startMoving() {
+        Rigidbody rigidbody = ball.gameObject.GetComponent<Rigidbody>();
+        rigidbody.isKinematic = false;
+        rigidbody.velocity = ballPausedVelocity;
+        rigidbody.angularVelocity = ballPausedAngularVelocity;
         ball.enabled = true;
+
         car.enabled = true;
+        
     }
 
     public void stopMoving() {
+        Rigidbody rigidbody = ball.gameObject.GetComponent<Rigidbody>();
+        ballPausedVelocity = rigidbody.velocity;
+        ballPausedAngularVelocity = rigidbody.angularVelocity;
+        rigidbody.isKinematic = true;
         ball.enabled = false;
+
         car.enabled = false;
     }
 

@@ -14,8 +14,7 @@ public class BallController : BaseController
         transform.position = new Vector3(0, 1.5f, 0);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Joystick() 
     {
         if (Input.GetMouseButtonDown(0)) {
             touchPosition = Input.mousePosition;
@@ -24,13 +23,25 @@ public class BallController : BaseController
         {
             Vector3 mousePosition = Input.mousePosition;
             float deltaSwipe = Mathf.Min(mousePosition.x - touchPosition.x, 250);
-            //float deltaSwipe = mousePosition.x - touchPosition.x;
             float X = Mathf.Min(radius, transform.position.x);
             float angle = Mathf.Atan(2 * X / Mathf.Sqrt(radius * radius - X * X)) * 180 / Mathf.PI;
-            Vector3 direction = Quaternion.AngleAxis(angle, Vector3.forward) * transform.right;
+            angle = Mathf.Min(angle, 60);
+            angle = Mathf.Max(angle, -60);
+            Vector3 direction = Quaternion.AngleAxis(angle, Vector3.forward) * transform.right;            
             direction.Normalize();
-            //print("Direction " + direction + " Angle " + angle + " delta " + deltaSwipe);
+
+            //Debug.DrawRay(transform.position, transform.TransformDirection(direction) * deltaSwipe / 80f, Color.yellow);
+
             GetComponent<Rigidbody>().AddForce(direction * deltaSwipe * 3);
         }
+    }    
+
+    // Update is called once per frame
+    protected override void Update()
+    {
+        base.Update();
+        if (isGrounded) {
+            Joystick();            
+        }        
     }
 }

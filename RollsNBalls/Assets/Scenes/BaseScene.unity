@@ -303,6 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   world: {fileID: 2037390398}
+  mainCamera: {fileID: 963194225}
   radius: 5
 --- !u!54 &94635567
 Rigidbody:
@@ -852,9 +853,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2037390396}
-        m_TargetAssemblyTypeName: mapGeneration, Assembly-CSharp
-        m_MethodName: stop
+      - m_Target: {fileID: 2037390398}
+        m_TargetAssemblyTypeName: generalWorld, Assembly-CSharp
+        m_MethodName: pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1196,8 +1197,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2037390396}
-        m_TargetAssemblyTypeName: mapGeneration, Assembly-CSharp
+      - m_Target: {fileID: 2037390398}
+        m_TargetAssemblyTypeName: generalWorld, Assembly-CSharp
         m_MethodName: resume
         m_Mode: 1
         m_Arguments:
@@ -2383,6 +2384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   world: {fileID: 2037390398}
+  mainCamera: {fileID: 963194225}
 --- !u!65 &1135379018
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3267,8 +3269,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2037390396}
-        m_TargetAssemblyTypeName: mapGeneration, Assembly-CSharp
+      - m_Target: {fileID: 2037390398}
+        m_TargetAssemblyTypeName: generalWorld, Assembly-CSharp
         m_MethodName: resume
         m_Mode: 1
         m_Arguments:
