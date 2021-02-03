@@ -9,40 +9,32 @@ public enum sideEnum
     Right = -2
 }
 
-public class CarController : MonoBehaviour
+public class CarController : BaseController
 {
-    public GameObject model;
-    public HUDController HUD;
     private Vector2 touchPosition;
     private int side;
-    private bool moving = false;    
-    public generalWorld world;
-
-    private void gameOver()
-    {
-        world.gameOver();
-    }
+    private bool sliding = false;    
 
     IEnumerator changeLine(bool left)
     {
-        moving = true;
+        sliding = true;
         if (left)
         {
             for (int i = 2; i < 33; i = (i << 1))
             {
-                model.transform.position -= new Vector3(2.0f / i, 0, 0);
+                transform.position -= new Vector3(2.0f / i, 0, 0);
                 yield return new WaitForSeconds(0.001f);
             }            
         } else
         {
             for (int i = 2; i < 33; i = (i << 1))
             {
-                model.transform.position += new Vector3(2.0f / i, 0, 0);
+                transform.position += new Vector3(2.0f / i, 0, 0);
                 yield return new WaitForSeconds(0.001f);
             }            
         }
-        model.transform.position = new Vector3(side, model.transform.position.y, model.transform.position.z);
-        moving = false;
+        transform.position = new Vector3(side, transform.position.y, transform.position.z);
+        sliding = false;
         yield return null;        
     }
 
@@ -55,7 +47,7 @@ public class CarController : MonoBehaviour
         {
             Vector3 mousePosition = Input.mousePosition;
             Vector2 deltaSwipe = touchPosition - new Vector2(mousePosition.x, mousePosition.y);
-            if (Mathf.Abs(deltaSwipe.x) > 50.0f && !moving)
+            if (Mathf.Abs(deltaSwipe.x) > 50.0f && !sliding)
             {
                 side = side + (deltaSwipe.x < 0 ? 2 : -2);
 
@@ -69,22 +61,18 @@ public class CarController : MonoBehaviour
             }
         }
     }
-    
+
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         side = (int)sideEnum.Middle;
-        model.transform.position = new Vector3(side, model.transform.position.y, model.transform.position.z);
+        transform.position = new Vector3(side, transform.position.y, transform.position.z);
     }
 
     // Update is called once per frame
     void Update()
     {
         slideProcessing();
-    }
-
-    public void restart()
-    {
-        Start();
     }
 }
