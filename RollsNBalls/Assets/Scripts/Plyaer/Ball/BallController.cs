@@ -39,7 +39,7 @@ public class BallController : BaseController
 
             GetComponent<Rigidbody>().AddForce(direction * deltaSwipe * 3);
         }
-    }    
+    }
 
     // Update is called once per frame
     protected override void Update()
