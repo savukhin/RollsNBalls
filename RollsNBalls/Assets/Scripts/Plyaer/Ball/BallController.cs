@@ -16,13 +16,18 @@ public class BallController : BaseController
 
     private void Joystick() 
     {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0))
+        {
             touchPosition = Input.mousePosition;
         }
-        if (Input.GetMouseButton(0)) 
+        if (Input.GetMouseButton(0) && isGrounded)
         {
             Vector3 mousePosition = Input.mousePosition;
-            float deltaSwipe = Mathf.Min(mousePosition.x - touchPosition.x, 250);
+            float deltaSwipe = mousePosition.x - touchPosition.x;
+            if (Mathf.Abs(deltaSwipe) > 200) {
+                touchPosition.x = mousePosition.x - deltaSwipe;
+            }
+
             float X = Mathf.Min(radius, transform.position.x);
             float angle = Mathf.Atan(2 * X / Mathf.Sqrt(radius * radius - X * X)) * 180 / Mathf.PI;
             angle = Mathf.Min(angle, 60);
@@ -40,8 +45,6 @@ public class BallController : BaseController
     protected override void Update()
     {
         base.Update();
-        if (isGrounded) {
-            Joystick();            
-        }        
+        Joystick();
     }
 }
