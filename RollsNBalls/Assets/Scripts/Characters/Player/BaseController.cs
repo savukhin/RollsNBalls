@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseController : MonoBehaviour
+public class BaseController : BaseCharacter
 {
-    //public GameObject model;
-    public generalWorld world;
     public GameObject mainCamera;
     protected bool isGrounded;
 

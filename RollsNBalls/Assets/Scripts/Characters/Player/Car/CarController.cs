@@ -13,7 +13,7 @@ public class CarController : BaseController
 {
     private Vector2 touchPosition;
     private int side;
-    private bool sliding = false;    
+    private bool sliding = false;
 
     IEnumerator changeLine(bool left)
     {
@@ -23,14 +23,15 @@ public class CarController : BaseController
             for (int i = 2; i < 33; i = (i << 1))
             {
                 transform.position -= new Vector3(2.0f / i, 0, 0);
-                yield return new WaitForSeconds(0.001f);
+                yield return new WaitForSeconds(0.01f);
             }            
-        } else
+        } 
+        else
         {
             for (int i = 2; i < 33; i = (i << 1))
             {
                 transform.position += new Vector3(2.0f / i, 0, 0);
-                yield return new WaitForSeconds(0.001f);
+                yield return new WaitForSeconds(0.01f);
             }            
         }
         transform.position = new Vector3(side, transform.position.y, transform.position.z);

@@ -11,6 +11,7 @@ public enum gameModesEnum {
 public class generalWorld : MonoBehaviour
 {
     public ControllerRouter player;
+    public Boss boss;
     //[System.NonSerialized]
     public gameModesEnum gameMode;
     [SerializeField]
@@ -31,6 +32,7 @@ public class generalWorld : MonoBehaviour
         generator.pause = false;
         HUD.SetActive(true);
         mainMenu.SetActive(false);
+        boss.Activate();
         StartCoroutine("ScoreUpdate");
     }
 
@@ -38,12 +40,16 @@ public class generalWorld : MonoBehaviour
     {
         player.stopMoving();
         generator.stop();
+        boss.Stop();
+        StopCoroutine("ScoreUpdate");
     }
 
     public void resume()
     {
         player.startMoving();
         generator.resume();
+        boss.Activate();
+        StartCoroutine("ScoreUpdate");
     }
 
     public void gameOver()
@@ -52,6 +58,7 @@ public class generalWorld : MonoBehaviour
         generator.stop();
         HUD.SetActive(false);
         gameOverBanner.SetActive(true);
+        boss.Stop();
         StopCoroutine("ScoreUpdate");
     }
 
