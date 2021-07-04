@@ -21,6 +21,7 @@ public class generalWorld : MonoBehaviour
     public int maxHealthPoints = 3;
     private int healthPoints;
     public int moneyPoints = 3;
+    public int score = 0;
 
     public void startGame() {
         player.startMoving();
@@ -30,6 +31,7 @@ public class generalWorld : MonoBehaviour
         generator.pause = false;
         HUD.SetActive(true);
         mainMenu.SetActive(false);
+        StartCoroutine("ScoreUpdate");
     }
 
     public void pause()
@@ -50,6 +52,7 @@ public class generalWorld : MonoBehaviour
         generator.stop();
         HUD.SetActive(false);
         gameOverBanner.SetActive(true);
+        StopCoroutine("ScoreUpdate");
     }
 
     public void takeDamage(int damage=1)
@@ -60,6 +63,15 @@ public class generalWorld : MonoBehaviour
             gameOver();
     }
 
+    IEnumerator ScoreUpdate() {
+        for (;;) {
+            score++;
+            generator.speed += 0.1f;
+            HUD.GetComponent<HUDController>().updateScore(score);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +79,7 @@ public class generalWorld : MonoBehaviour
         generator.gameMode = gameMode;
         player.changeGameMode(gameMode);
         generator.initializeGeneration();
+        score = 0;
     }
 
     public void restart() 

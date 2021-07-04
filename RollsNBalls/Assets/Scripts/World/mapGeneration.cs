@@ -14,6 +14,8 @@ public class mapGeneration : MonoBehaviour
     public GameObject startPlaneStagePrefab;
     private GameObject currentStage;
     private GameObject nextStage;
+    public float startSpeed = 4f;
+    [System.NonSerialized]
     public float speed = 4f;
     [System.NonSerialized]
     public bool pause = true;
@@ -39,8 +41,7 @@ public class mapGeneration : MonoBehaviour
         return stage.transform.localScale.z * stage.GetComponent<Collider>().bounds.size.z;
     }
 
-    void generateRandomStage()
-    {
+    void generateRandomStage() {
         if (gameMode == gameModesEnum.Car)
 		    nextStage = Instantiate(carStagesPrefabs[Random.Range(0, carStagesPrefabs.Length)], currentStage.transform.position, currentStage.transform.rotation);
         else if (gameMode == gameModesEnum.Ball)
@@ -61,8 +62,8 @@ public class mapGeneration : MonoBehaviour
         nextStage.transform.position += direction * speed * Time.deltaTime;
     }
 
-    public void initializeGeneration()
-    {
+    public void initializeGeneration() {
+        speed = startSpeed;
         Destroy(currentStage);
         Destroy(nextStage);
         if (gameMode == gameModesEnum.Car)
