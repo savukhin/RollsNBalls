@@ -10,6 +10,9 @@ public enum gameModesEnum {
 
 public class generalWorld : MonoBehaviour
 {
+    public UnityEngine.Events.UnityEvent pauseEvent;
+    public UnityEngine.Events.UnityEvent resumeEvent;
+    public UnityEngine.Events.UnityEvent gameOverEvent;
     public ControllerRouter player;
     public Boss boss;
     //[System.NonSerialized]
@@ -41,6 +44,7 @@ public class generalWorld : MonoBehaviour
         player.stopMoving();
         generator.stop();
         boss.Stop();
+        pauseEvent.Invoke();
         StopCoroutine("ScoreUpdate");
     }
 
@@ -49,6 +53,7 @@ public class generalWorld : MonoBehaviour
         player.startMoving();
         generator.resume();
         boss.Activate();
+        resumeEvent.Invoke();
         StartCoroutine("ScoreUpdate");
     }
 
@@ -59,6 +64,7 @@ public class generalWorld : MonoBehaviour
         HUD.SetActive(false);
         gameOverBanner.SetActive(true);
         boss.Stop();
+        gameOverEvent.Invoke();
         StopCoroutine("ScoreUpdate");
     }
 

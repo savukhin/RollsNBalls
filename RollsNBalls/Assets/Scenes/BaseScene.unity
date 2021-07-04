@@ -1350,7 +1350,7 @@ MonoBehaviour:
   world: {fileID: 2037390398}
   strikePrefab: {fileID: 5047463378227086568, guid: e92d83a57867e97409ac14464f2d8b6c, type: 3}
   strikeRate: 2
-  strikeChance: 1
+  strikeChance: 0.5
 --- !u!1 &756621443
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,8 +1660,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelPrefab: {fileID: 0}
+  gameMode: 0
   strikeDelay: 0.5
   spotPointPrefab: {fileID: 0}
+  spotLinePrefab: {fileID: 0}
 --- !u!1 &821702193
 GameObject:
   m_ObjectHideFlags: 0
@@ -4221,9 +4223,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a6c75ba6be8b64f8f6d69fa95dbf80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  resumeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  gameOverEvent:
+    m_PersistentCalls:
+      m_Calls: []
   player: {fileID: 197884124}
-  boss: {fileID: 0}
-  gameMode: 2
+  boss: {fileID: 710215625}
+  gameMode: 1
   generator: {fileID: 2037390396}
   HUD: {fileID: 780091270}
   mainMenu: {fileID: 1950551350}
@@ -4240,7 +4251,7 @@ BoxCollider:
   m_GameObject: {fileID: 2037390395}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

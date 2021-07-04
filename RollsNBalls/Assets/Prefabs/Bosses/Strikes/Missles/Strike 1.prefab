@@ -47,6 +47,7 @@ MonoBehaviour:
   modelPrefab: {fileID: 5088958258274672491, guid: 9049f8cc0ee8d8b48886e9efff690e15, type: 3}
   strikeDelay: 1
   spotPointPrefab: {fileID: 6090476342892896999, guid: 7a68ba80f1bea8b4da49d4bcb49fbb13, type: 3}
+  spotLinePrefab: {fileID: 247920771141544981, guid: 1635475f3ca6bb145b1bcf7c6cf2e336, type: 3}
 --- !u!54 &-4672061259552101288
 Rigidbody:
   m_ObjectHideFlags: 0

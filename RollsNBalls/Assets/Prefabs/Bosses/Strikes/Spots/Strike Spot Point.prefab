@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6090476342892896992}
   - component: {fileID: 26969197022777709}
   m_Layer: 0
-  m_Name: Strike Spot
+  m_Name: Strike Spot Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
