@@ -8,8 +8,10 @@ public class mapGeneration : MonoBehaviour
     public gameModesEnum gameMode = gameModesEnum.Ball;
     public GameObject[] carStagesPrefabs;
     public GameObject[] ballStagesPrefabs;
+    public GameObject[] planeStagesPrefabs;
     public GameObject startCarStagePrefab;
     public GameObject startBallStagePrefab;
+    public GameObject startPlaneStagePrefab;
     private GameObject currentStage;
     private GameObject nextStage;
     public float speed = 4f;
@@ -37,11 +39,14 @@ public class mapGeneration : MonoBehaviour
         return stage.transform.localScale.z * stage.GetComponent<Collider>().bounds.size.z;
     }
 
-    void generateRandomStage() {
+    void generateRandomStage()
+    {
         if (gameMode == gameModesEnum.Car)
-		    nextStage = Instantiate(carStagesPrefabs[Random.Range(0, 2)], currentStage.transform.position, currentStage.transform.rotation);
+		    nextStage = Instantiate(carStagesPrefabs[Random.Range(0, carStagesPrefabs.Length)], currentStage.transform.position, currentStage.transform.rotation);
         else if (gameMode == gameModesEnum.Ball)
-            nextStage = Instantiate(ballStagesPrefabs[Random.Range(0, 2)], currentStage.transform.position, currentStage.transform.rotation);
+            nextStage = Instantiate(ballStagesPrefabs[Random.Range(0, ballStagesPrefabs.Length)], currentStage.transform.position, currentStage.transform.rotation);
+        else if (gameMode == gameModesEnum.Plane)
+            nextStage = Instantiate(planeStagesPrefabs[Random.Range(0, planeStagesPrefabs.Length)], currentStage.transform.position, currentStage.transform.rotation);
         nextStage.transform.position += new Vector3(0, 0, getStageSize(currentStage) / 2 + getStageSize(nextStage) / 2);
     }
 
@@ -64,6 +69,8 @@ public class mapGeneration : MonoBehaviour
             currentStage = Instantiate(startCarStagePrefab, new Vector3(0, 0, 10), startCarStagePrefab.transform.rotation);
         else if (gameMode == gameModesEnum.Ball)
             currentStage = Instantiate(startBallStagePrefab, new Vector3(0, 0, 10), startCarStagePrefab.transform.rotation);
+        else if (gameMode == gameModesEnum.Plane)
+            currentStage = Instantiate(startPlaneStagePrefab, new Vector3(0, 0, 10), startCarStagePrefab.transform.rotation);
         generateRandomStage();
     }
 
