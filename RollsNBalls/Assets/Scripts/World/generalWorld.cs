@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum gameModesEnum {
     Ball = 1,
@@ -10,9 +11,14 @@ public enum gameModesEnum {
 
 public class generalWorld : MonoBehaviour
 {
-    public UnityEngine.Events.UnityEvent pauseEvent;
-    public UnityEngine.Events.UnityEvent resumeEvent;
-    public UnityEngine.Events.UnityEvent gameOverEvent;
+    [Serializable]
+    public struct Events {
+        public UnityEngine.Events.UnityEvent pauseEvent;
+        public UnityEngine.Events.UnityEvent resumeEvent;
+        public UnityEngine.Events.UnityEvent gameOverEvent;
+        public UnityEngine.Events.UnityEvent restartEvent;
+    }
+    public Events events;
     public ControllerRouter player;
     public Boss boss;
     //[System.NonSerialized]
@@ -24,7 +30,7 @@ public class generalWorld : MonoBehaviour
     public GameObject gameOverBanner;
     public int maxHealthPoints = 3;
     private int healthPoints;
-    public int moneyPoints = 3;
+    public int moneyPoints = 0;
     public int score = 0;
 
     public void startGame() {
@@ -41,30 +47,30 @@ public class generalWorld : MonoBehaviour
 
     public void pause()
     {
-        player.stopMoving();
-        generator.stop();
-        boss.Stop();
-        pauseEvent.Invoke();
+        //player.stopMoving();
+        //generator.stop();
+        //boss.Stop();
+        events.pauseEvent.Invoke();
         StopCoroutine("ScoreUpdate");
     }
 
     public void resume()
     {
-        player.startMoving();
-        generator.resume();
-        boss.Activate();
-        resumeEvent.Invoke();
+        //player.startMoving();
+        //generator.resume();
+        //boss.Activate();
+        events.resumeEvent.Invoke();
         StartCoroutine("ScoreUpdate");
     }
 
     public void gameOver()
     {
-        player.stopMoving();
-        generator.stop();
-        HUD.SetActive(false);
-        gameOverBanner.SetActive(true);
-        boss.Stop();
-        gameOverEvent.Invoke();
+        // player.stopMoving();
+        // generator.stop();
+        // HUD.SetActive(false);
+        // gameOverBanner.SetActive(true);
+        // boss.Stop();
+        events.gameOverEvent.Invoke();
         StopCoroutine("ScoreUpdate");
     }
 
@@ -98,10 +104,11 @@ public class generalWorld : MonoBehaviour
     public void restart() 
     {
         Start();
-        HUD.SetActive(false);
-        mainMenu.SetActive(true);
-        gameOverBanner.SetActive(false);
-        generator.restart();
-        player.restart();
+        // HUD.SetActive(false);
+        // mainMenu.SetActive(true);
+        // gameOverBanner.SetActive(false);
+        // generator.restart();
+        // player.restart();
+        events.restartEvent.Invoke();
     }
 }

@@ -15,9 +15,9 @@ public class Boss : BaseCharacter
             if (dice < strikeChance) {
                 var strike = Instantiate(strikePrefab);
                 strike.GetComponent<BaseStrike>().Launch(transform, world.gameMode);
-                world.pauseEvent.AddListener(strike.GetComponent<BaseStrike>().Pause);
-                world.resumeEvent.AddListener(strike.GetComponent<BaseStrike>().Resume);
-                world.gameOverEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
+                world.events.pauseEvent.AddListener(strike.GetComponent<BaseStrike>().Pause);
+                world.events.resumeEvent.AddListener(strike.GetComponent<BaseStrike>().Resume);
+                world.events.gameOverEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
             }
             yield return new WaitForSeconds(strikeRate);
         }
