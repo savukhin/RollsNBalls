@@ -7,6 +7,7 @@ public class HUDController : MonoBehaviour
 {
     public Text HPText;
     public Text MoneyText;
+    public Text BannerMoneyText;
     public Text ScoreText;
 
     public void updateHealthPoints(int healthPoints) {
@@ -15,6 +16,7 @@ public class HUDController : MonoBehaviour
 
     public void updateMoneyPoints(int money) {
         MoneyText.text = money.ToString();
+        BannerMoneyText.text = money.ToString();
     }
 
     public void updateScore(int score) {
