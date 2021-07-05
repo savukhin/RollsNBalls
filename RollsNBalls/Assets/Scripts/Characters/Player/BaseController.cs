@@ -14,8 +14,18 @@ public class BaseController : BaseCharacter
 
     public void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Obstacle")
-            world.takeDamage(1);
+        switch (collider.tag)
+        {
+            case "Obstacle":
+                world.takeDamage(1);
+                break;
+            case "Stage Object":
+                if (collider.GetComponent<Coin>() != null)
+                    world.takeMoney(collider.GetComponent<Coin>().cost);
+                break;
+          default:
+              break;
+      }
     }
     
     private void OnCollisionExit(Collision other)

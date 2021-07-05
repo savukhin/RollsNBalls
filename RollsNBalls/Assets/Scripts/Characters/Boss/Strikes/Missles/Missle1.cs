@@ -30,8 +30,7 @@ public class Missle1 : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider collider) {
-        print(collider);
         if (collider.tag != "Obstacle")
-        onBump.Invoke();
+            onBump.Invoke();
     }
 }

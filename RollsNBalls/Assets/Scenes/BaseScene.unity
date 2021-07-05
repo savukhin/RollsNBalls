@@ -4187,6 +4187,7 @@ MonoBehaviour:
   carStagesPrefabs:
   - {fileID: 4204965761393728710, guid: e3b7f017ea884fe4082023034f179a4c, type: 3}
   - {fileID: 3529328894845094288, guid: 06e07cf791834f348b4e064b9f032d60, type: 3}
+  - {fileID: 8370102610717940871, guid: 4560ccb5f2fe1554bb5cbd8f30f18116, type: 3}
   ballStagesPrefabs:
   - {fileID: 7374452532090298514, guid: 7a6743c5bd24171439d682e731afe0aa, type: 3}
   - {fileID: 81613423569405125, guid: 36fa20fa70c306a429f58ff06cd55d34, type: 3}
@@ -4430,7 +4431,7 @@ MonoBehaviour:
           m_CallState: 2
   player: {fileID: 197884124}
   boss: {fileID: 710215625}
-  gameMode: 1
+  gameMode: 2
   generator: {fileID: 2037390396}
   HUD: {fileID: 780091270}
   mainMenu: {fileID: 1950551350}

@@ -82,6 +82,12 @@ public class generalWorld : MonoBehaviour
             gameOver();
     }
 
+    public void takeMoney(int money=1)
+    {
+        moneyPoints += money;
+        HUD.GetComponent<HUDController>().updateMoneyPoints(moneyPoints);
+    }
+
     IEnumerator ScoreUpdate() {
         for (;;) {
             score++;

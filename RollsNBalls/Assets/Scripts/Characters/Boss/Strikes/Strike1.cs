@@ -43,7 +43,7 @@ public class Strike1 : BaseStrike
         var rigidbody = missle2.AddComponent(typeof(Rigidbody)) as Rigidbody;
         rigidbody.useGravity = false;
         if (gameMode == gameModesEnum.Car) {
-            missle2.transform.position = new Vector3(0, 10f, 0);
+            missle2.transform.position = spot.transform.position + new Vector3(0, 10f, 0);
             missle2.transform.rotation = Quaternion.Euler(90, 0, 0);
             missle2.GetComponent<Rigidbody>().AddForce(new Vector3(0, -15f, 0), ForceMode.VelocityChange);
         }
