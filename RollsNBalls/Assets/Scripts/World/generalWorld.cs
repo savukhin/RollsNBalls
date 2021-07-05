@@ -16,6 +16,7 @@ public class generalWorld : MonoBehaviour
         public UnityEngine.Events.UnityEvent pauseEvent;
         public UnityEngine.Events.UnityEvent resumeEvent;
         public UnityEngine.Events.UnityEvent gameOverEvent;
+        public UnityEngine.Events.UnityEvent winEvent;
         public UnityEngine.Events.UnityEvent restartEvent;
     }
     public Events events;
@@ -36,8 +37,7 @@ public class generalWorld : MonoBehaviour
     public void startGame() {
         player.startMoving();
         playerHealthPoints = maxPlayerHealthPoints;
-        HUD.GetComponent<HUDController>().updateHealthPoints(playerHealthPoints);
-        HUD.GetComponent<HUDController>().updateMoneyPoints(moneyPoints);
+        updateHUD();
         generator.pause = false;
         HUD.SetActive(true);
         mainMenu.SetActive(false);
@@ -47,9 +47,6 @@ public class generalWorld : MonoBehaviour
 
     public void pause()
     {
-        //player.stopMoving();
-        //generator.stop();
-        //boss.Stop();
         events.pauseEvent.Invoke();
         StopCoroutine("ScoreUpdate");
         Time.timeScale = 0;
@@ -57,9 +54,6 @@ public class generalWorld : MonoBehaviour
 
     public void resume()
     {
-        //player.startMoving();
-        //generator.resume();
-        //boss.Activate();
         events.resumeEvent.Invoke();
         StartCoroutine("ScoreUpdate");
         Time.timeScale = 1;
@@ -67,11 +61,12 @@ public class generalWorld : MonoBehaviour
 
     public void gameOver()
     {
-        // player.stopMoving();
-        // generator.stop();
-        // HUD.SetActive(false);
-        // gameOverBanner.SetActive(true);
-        // boss.Stop();
+        events.gameOverEvent.Invoke();
+        StopCoroutine("ScoreUpdate");
+    }
+
+    public void win()
+    {
         events.gameOverEvent.Invoke();
         StopCoroutine("ScoreUpdate");
     }
@@ -81,6 +76,8 @@ public class generalWorld : MonoBehaviour
         var controller = HUD.GetComponent<HUDController>();
         controller.updateHealthPoints(player.healthPoints);
         controller.updateMoneyPoints(player.moneyPoints);
+        controller.updateBossHealthPoints(boss.healthPoints);
+        controller.updateBossMaxHealthPoints(boss.maxHealthPoints);
     }
 
     IEnumerator ScoreUpdate() {
@@ -95,7 +92,6 @@ public class generalWorld : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //gameMode = gameModesEnum.Ball;
         generator.gameMode = gameMode;
         player.changeGameMode(gameMode);
         generator.initializeGeneration();
@@ -105,11 +101,6 @@ public class generalWorld : MonoBehaviour
     public void restart() 
     {
         Start();
-        // HUD.SetActive(false);
-        // mainMenu.SetActive(true);
-        // gameOverBanner.SetActive(false);
-        // generator.restart();
-        // player.restart();
         events.restartEvent.Invoke();
     }
 }

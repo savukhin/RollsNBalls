@@ -16,15 +16,10 @@ public class BaseCharacter : MonoBehaviour
     public int healthPoints;
     public GameObject model;
     public generalWorld world;
-    // Start is called before the first frame update
-    void Start()
+    
+    public virtual void takeDamage(int damage = 1)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        healthPoints -= damage;
+        world.updateHUD();
     }
 }

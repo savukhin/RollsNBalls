@@ -52,12 +52,11 @@ public class ControllerRouter : BaseCharacter
         world.gameOver();
     }
 
-    public void takeDamage(int damage = 1)
+    public override void takeDamage(int damage = 1)
     {
-        healthPoints -= damage;
+        base.takeDamage(damage);
         if (healthPoints <= 0)
             gameOver();
-        world.updateHUD();
     }
 
     public void heal(int count=1)

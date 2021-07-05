@@ -35,15 +35,31 @@ public class Boss : BaseCharacter
         StopCoroutine("Strike");
     }
 
+    public override void takeDamage(int damage = 1)
+    {
+        base.takeDamage(damage);
+        if (healthPoints <= 0)
+            world.win();
+    }
+
+    public void OnTriggerEnter(Collider collider)
+    {
+        switch (collider.tag)
+        {
+            case "Player Missle":
+                takeDamage(1);
+                break;
+      }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthPoints = maxHealthPoints;
+        world.updateHUD();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void restart() {
+        Start();
     }
 }
