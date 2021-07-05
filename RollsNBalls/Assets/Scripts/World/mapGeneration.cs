@@ -9,9 +9,18 @@ public class mapGeneration : MonoBehaviour
     public GameObject[] carStagesPrefabs;
     public GameObject[] ballStagesPrefabs;
     public GameObject[] planeStagesPrefabs;
+
     public GameObject startCarStagePrefab;
     public GameObject startBallStagePrefab;
     public GameObject startPlaneStagePrefab;
+
+    [System.Serializable] public class Gates {
+        public GameObject carGatePrefab;
+        public GameObject ballGatePrefab;
+        public GameObject planeGatePrefab;
+    }
+    [SerializeField] public Gates gates;
+
     private GameObject currentStage;
     private GameObject nextStage;
     public float startSpeed = 4f;
@@ -19,12 +28,14 @@ public class mapGeneration : MonoBehaviour
     public float speed = 4f;
     [System.NonSerialized]
     public bool pause = true;
+    public float gateChance = 0.1f;
 
     public void restart() {
         //Destroy(currentStage.gameObject);
         //Destroy(currentStage);
         //Destroy(nextStage.gameObject);
         //currentStage = Instantiate(startStagePrefab, new Vector3(0, 0, 10), startStagePrefab.transform.rotation);
+        speed = startSpeed;
         initializeGeneration();
     }
 
@@ -42,12 +53,30 @@ public class mapGeneration : MonoBehaviour
     }
 
     void generateRandomStage() {
-        if (gameMode == gameModesEnum.Car)
+        if (Random.Range(0f, 1f) < gateChance)
+        {
+            int ind = (((int)gameMode) - 1 + Random.Range(1, 3)) % 3 + 1;
+            switch (ind)
+            {
+                case 1:
+                    nextStage = Instantiate(gates.ballGatePrefab, currentStage.transform.position, currentStage.transform.rotation);
+                    break;
+                case 2:
+                    nextStage = Instantiate(gates.carGatePrefab, currentStage.transform.position, currentStage.transform.rotation);
+                    break;
+                case 3:
+                    nextStage = Instantiate(gates.planeGatePrefab, currentStage.transform.position, currentStage.transform.rotation);
+                    break;
+            }
+            nextStage.transform.position += new Vector3(0, 2f, 0);
+        }
+        else if (gameMode == gameModesEnum.Car)
 		    nextStage = Instantiate(carStagesPrefabs[Random.Range(0, carStagesPrefabs.Length)], currentStage.transform.position, currentStage.transform.rotation);
         else if (gameMode == gameModesEnum.Ball)
             nextStage = Instantiate(ballStagesPrefabs[Random.Range(0, ballStagesPrefabs.Length)], currentStage.transform.position, currentStage.transform.rotation);
         else if (gameMode == gameModesEnum.Plane)
             nextStage = Instantiate(planeStagesPrefabs[Random.Range(0, planeStagesPrefabs.Length)], currentStage.transform.position, currentStage.transform.rotation);
+
         nextStage.transform.position += new Vector3(0, 0, getStageSize(currentStage) / 2 + getStageSize(nextStage) / 2);
     }
 
@@ -62,8 +91,14 @@ public class mapGeneration : MonoBehaviour
         nextStage.transform.position += direction * speed * Time.deltaTime;
     }
 
+    
+    public void changeGameMode(gameModesEnum mode)
+    {
+        this.gameMode = mode;
+        initializeGeneration();
+    }
+
     public void initializeGeneration() {
-        speed = startSpeed;
         Destroy(currentStage);
         Destroy(nextStage);
         if (gameMode == gameModesEnum.Car)

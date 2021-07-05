@@ -51,8 +51,11 @@ public class BaseController : MonoBehaviour
                     }
                 }
                 break;
-          default:
-              break;
+            case "Gate":
+                player.collideGate(collider.GetComponent<Gate>().type);
+                break;
+            default:
+                break;
       }
     }
     

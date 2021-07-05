@@ -23,6 +23,13 @@ public class ControllerRouter : BaseCharacter
         controller.stopMoving();
     }
 
+    public void collideGate(gameModesEnum mode)
+    {
+        world.changeGameMode(mode);
+        this.gameMode = mode;
+        changeGameMode(mode);
+    }
+
     public void changeGameMode(gameModesEnum mode) {
         if (controller)
             Destroy(controller.gameObject);
@@ -80,6 +87,7 @@ public class ControllerRouter : BaseCharacter
         world.events.pauseEvent.AddListener(strike.GetComponent<BaseStrike>().Pause);
         world.events.resumeEvent.AddListener(strike.GetComponent<BaseStrike>().Resume);
         world.events.gameOverEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
+        world.events.winEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
     }
 
     // Start is called before the first frame update

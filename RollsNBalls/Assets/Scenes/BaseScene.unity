@@ -2790,7 +2790,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &979681991
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5215,7 +5215,12 @@ MonoBehaviour:
   startCarStagePrefab: {fileID: 8370102610717940871, guid: 4560ccb5f2fe1554bb5cbd8f30f18116, type: 3}
   startBallStagePrefab: {fileID: 81613423569405125, guid: 36fa20fa70c306a429f58ff06cd55d34, type: 3}
   startPlaneStagePrefab: {fileID: 3907433496218051214, guid: 7feab30ddaddfda429329954f1c20601, type: 3}
+  gates:
+    carGatePrefab: {fileID: 8294836491437938464, guid: 5144d2b5714b3424a9f719758536e913, type: 3}
+    ballGatePrefab: {fileID: 6882129409228719114, guid: e9a7900a3dad72147a9c593310d2ce01, type: 3}
+    planeGatePrefab: {fileID: 1152984689066930642, guid: 625a17153e7a6e341a5db6aceeaea5d2, type: 3}
   startSpeed: 4
+  gateChance: 0.1
 --- !u!4 &2037390397
 Transform:
   m_ObjectHideFlags: 0
@@ -5522,6 +5527,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    changeGameModeEvent:
+      m_PersistentCalls:
+        m_Calls: []
   player: {fileID: 197884124}
   boss: {fileID: 710215625}
   gameMode: 2

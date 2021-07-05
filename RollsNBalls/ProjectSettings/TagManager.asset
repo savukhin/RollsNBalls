@@ -10,6 +10,7 @@ TagManager:
   - Boss
   - Player Missle
   - Boss Missle
+  - Gate
   layers:
   - Default
   - TransparentFX

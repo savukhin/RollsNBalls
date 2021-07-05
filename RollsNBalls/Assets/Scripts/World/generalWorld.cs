@@ -18,6 +18,7 @@ public class generalWorld : MonoBehaviour
         public UnityEngine.Events.UnityEvent gameOverEvent;
         public UnityEngine.Events.UnityEvent winEvent;
         public UnityEngine.Events.UnityEvent restartEvent;
+        public UnityEngine.Events.UnityEvent changeGameModeEvent;
     }
     public Events events;
     public ControllerRouter player;
@@ -67,7 +68,7 @@ public class generalWorld : MonoBehaviour
 
     public void win()
     {
-        events.gameOverEvent.Invoke();
+        events.winEvent.Invoke();
         StopCoroutine("ScoreUpdate");
     }
 
@@ -87,6 +88,13 @@ public class generalWorld : MonoBehaviour
             HUD.GetComponent<HUDController>().updateScore(score);
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    public void changeGameMode(gameModesEnum mode)
+    {
+        events.changeGameModeEvent.Invoke();
+        this.gameMode = mode;
+        generator.changeGameMode(mode);
     }
 
     // Start is called before the first frame update
