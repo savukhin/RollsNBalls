@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class BaseCharacter : MonoBehaviour
 {
+    [System.Serializable]
+    public struct Events {
+        public UnityEngine.Events.UnityEvent takeDamageEvent;
+        public UnityEngine.Events.UnityEvent healEvent;
+    }
+    public Events events;
     public GameObject strikePrefab;
+    public int maxHealthPoints;
+    [System.NonSerialized]
     public int healthPoints;
     public GameObject model;
     public generalWorld world;

@@ -28,15 +28,15 @@ public class generalWorld : MonoBehaviour
     public GameObject HUD;
     public GameObject mainMenu;
     public GameObject gameOverBanner;
-    public int maxHealthPoints = 3;
-    private int healthPoints;
+    public int maxPlayerHealthPoints = 3;
+    private int playerHealthPoints; 
     public int moneyPoints = 0;
     public int score = 0;
 
     public void startGame() {
         player.startMoving();
-        healthPoints = maxHealthPoints;
-        HUD.GetComponent<HUDController>().updateHealthPoints(healthPoints);
+        playerHealthPoints = maxPlayerHealthPoints;
+        HUD.GetComponent<HUDController>().updateHealthPoints(playerHealthPoints);
         HUD.GetComponent<HUDController>().updateMoneyPoints(moneyPoints);
         generator.pause = false;
         HUD.SetActive(true);
@@ -52,6 +52,7 @@ public class generalWorld : MonoBehaviour
         //boss.Stop();
         events.pauseEvent.Invoke();
         StopCoroutine("ScoreUpdate");
+        Time.timeScale = 0;
     }
 
     public void resume()
@@ -61,6 +62,7 @@ public class generalWorld : MonoBehaviour
         //boss.Activate();
         events.resumeEvent.Invoke();
         StartCoroutine("ScoreUpdate");
+        Time.timeScale = 1;
     }
 
     public void gameOver()
@@ -74,24 +76,11 @@ public class generalWorld : MonoBehaviour
         StopCoroutine("ScoreUpdate");
     }
 
-    public void takeDamage(int damage=1)
+    public void updateHUD()
     {
-        healthPoints -= damage;
-        HUD.GetComponent<HUDController>().updateHealthPoints(healthPoints);
-        if (healthPoints <= 0)
-            gameOver();
-    }
-
-    public void heal(int count=1)
-    {
-        healthPoints += count;
-        HUD.GetComponent<HUDController>().updateHealthPoints(healthPoints);
-    }
-
-    public void takeMoney(int money=1)
-    {
-        moneyPoints += money;
-        HUD.GetComponent<HUDController>().updateMoneyPoints(moneyPoints);
+        var controller = HUD.GetComponent<HUDController>();
+        controller.updateHealthPoints(player.healthPoints);
+        controller.updateMoneyPoints(player.moneyPoints);
     }
 
     IEnumerator ScoreUpdate() {

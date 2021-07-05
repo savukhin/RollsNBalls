@@ -2,14 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseController : BaseCharacter
+public class BaseController : MonoBehaviour
 {
-    public GameObject mainCamera;
+    [System.NonSerialized] public ControllerRouter player;
+    [System.NonSerialized] public GameObject mainCamera;
     protected bool isGrounded;
+
+    public virtual void stopMoving() {
+        this.enabled = false;
+    }
+
+    public virtual void startMoving() {
+        this.enabled = true;
+    }
 
     protected void gameOver()
     {
-        world.gameOver();
+        //world.gameOver();
+        player.gameOver();
     }
 
     public void OnTriggerEnter(Collider collider)
@@ -17,12 +27,15 @@ public class BaseController : BaseCharacter
         switch (collider.tag)
         {
             case "Obstacle":
-                world.takeDamage(1);
+                player.takeDamage(1);
+                break;
+            case "Boss Missle":
+                player.takeDamage(1);
                 break;
             case "Stage Object":
                 if (collider.GetComponent<Coin>() != null)
                 {
-                    world.takeMoney(collider.GetComponent<Coin>().cost);
+                    player.takeMoney(collider.GetComponent<Coin>().cost);
                 }
                 else if (collider.GetComponent<Effect>() != null)
                 {
@@ -30,15 +43,10 @@ public class BaseController : BaseCharacter
                     switch (effect.type)
                     {
                         case EffectTypesEnum.Heal:
-                            world.heal(effect.multiper);
+                            player.heal(effect.multiper);
                             break;
                         case EffectTypesEnum.Attack:
-                            print("Switching " + effect.type);
-                            var strike = Instantiate(strikePrefab);
-                            strike.GetComponent<BaseStrike>().Launch(transform, world.gameMode, world.boss.gameObject);
-                            world.events.pauseEvent.AddListener(strike.GetComponent<BaseStrike>().Pause);
-                            world.events.resumeEvent.AddListener(strike.GetComponent<BaseStrike>().Resume);
-                            world.events.gameOverEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
+                            player.attack();
                             break;
                     }
                 }

@@ -31,7 +31,6 @@ public class Missle1 : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider collider) {
-        print("Collider" + collider);
         if (tagAffects.Contains(collider.tag))
             onBump.Invoke();
     }

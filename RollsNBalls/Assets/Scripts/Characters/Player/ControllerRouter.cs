@@ -2,82 +2,98 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllerRouter : MonoBehaviour
+public class ControllerRouter : BaseCharacter
 {
     private gameModesEnum gameMode = gameModesEnum.Ball;
-    public CarController car;
-    public BallController ball;
-    public PlaneController plane;
+    public GameObject mainCamera;
+    public GameObject carPrefab;
+    public GameObject ballPrefab;
+    public GameObject planePrefab;
+    public BaseController controller;
     private Vector3 ballPausedVelocity = new Vector3(0, 0, 0);
     private Vector3 ballPausedAngularVelocity = new Vector3(0, 0, 0);
+    public int moneyPoints = 0;
 
     public void startMoving() {
-        Rigidbody rigidbody = ball.gameObject.GetComponent<Rigidbody>();
-        rigidbody.isKinematic = false;
-        rigidbody.velocity = ballPausedVelocity;
-        rigidbody.angularVelocity = ballPausedAngularVelocity;
-        ball.enabled = true;
-
-        car.enabled = true;
-        plane.enabled = true;        
+        controller.startMoving();
+        controller.enabled = true;
     }
 
     public void stopMoving() {
-        Rigidbody rigidbody = ball.gameObject.GetComponent<Rigidbody>();
-        ballPausedVelocity = rigidbody.velocity;
-        ballPausedAngularVelocity = rigidbody.angularVelocity;
-        rigidbody.isKinematic = true;
-        ball.enabled = false;
-
-        car.enabled = false;
-        plane.enabled = false;
+        controller.stopMoving();
     }
 
     public void changeGameMode(gameModesEnum mode) {
+        if (controller)
+            Destroy(controller.gameObject);
         gameMode = mode;
+        GameObject instance = new GameObject();
         switch (gameMode)
         {
             case gameModesEnum.Ball:
-                ball.gameObject.SetActive(true);
-                car.gameObject.SetActive(false);
-                plane.gameObject.SetActive(false);
+                instance = Instantiate(ballPrefab, transform);
                 break;
             case gameModesEnum.Car:
-                ball.gameObject.SetActive(false);
-                car.gameObject.SetActive(true);
-                plane.gameObject.SetActive(false);
+                instance = Instantiate(carPrefab, transform);
                 break;
             case gameModesEnum.Plane:
-                ball.gameObject.SetActive(false);
-                car.gameObject.SetActive(false);
-                plane.gameObject.SetActive(true);
+                instance = Instantiate(planePrefab, transform);
                 break;
             default:
                 break;
         }
+        controller = instance.GetComponent<BaseController>();
+        controller.mainCamera = mainCamera;
+        controller.player = this;
+    }
+
+    public void gameOver()
+    {
+        world.gameOver();
+    }
+
+    public void takeDamage(int damage = 1)
+    {
+        healthPoints -= damage;
+        if (healthPoints <= 0)
+            gameOver();
+        world.updateHUD();
+    }
+
+    public void heal(int count=1)
+    {
+        healthPoints += count;
+        if (healthPoints > maxHealthPoints)
+            healthPoints = maxHealthPoints;
+        world.updateHUD();
+    }
+
+    public void takeMoney(int money = 1)
+    {
+        moneyPoints += money;
+        world.updateHUD();
+    }
+
+    public void attack()
+    {
+        var strike = Instantiate(strikePrefab);
+        strike.GetComponent<BaseStrike>().Launch(controller.transform, world.gameMode, world.boss.gameObject);
+        world.events.pauseEvent.AddListener(strike.GetComponent<BaseStrike>().Pause);
+        world.events.resumeEvent.AddListener(strike.GetComponent<BaseStrike>().Resume);
+        world.events.gameOverEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        stopMoving();
+        healthPoints = maxHealthPoints;
+        world.updateHUD();
+        if (controller)
+            stopMoving();
     }
 
     public void restart() {
-        switch (gameMode)
-        {
-            case gameModesEnum.Ball:
-                ball.restart();
-                break;
-            case gameModesEnum.Car:
-                car.restart();
-                break;
-            case gameModesEnum.Plane:
-                plane.restart();
-                break;
-            default:
-                break;
-        }
+        changeGameMode(gameMode);
         Start();
     }
 }

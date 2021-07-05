@@ -6,12 +6,30 @@ public class BallController : BaseController
 {
     public float radius = 5;
     private Vector2 touchPosition;
+    private Vector3 pausedVelocity;
+    private Vector3 pausedAngularVelocity;
 
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
         transform.position = new Vector3(0, 1.5f, 0);
+    }
+
+    public override void stopMoving()
+    {
+        base.stopMoving();
+        Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
+        pausedVelocity = rigidbody.velocity;
+        pausedAngularVelocity = rigidbody.angularVelocity;
+        rigidbody.isKinematic = true;
+    }
+
+    public override void startMoving() {
+        Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
+        rigidbody.isKinematic = false;
+        rigidbody.velocity = pausedVelocity;
+        rigidbody.angularVelocity = pausedAngularVelocity;
     }
 
     private void Joystick() 

@@ -6,9 +6,11 @@ public class Boss : BaseCharacter
 {
     public float strikeRate;
     public float strikeChance; // value between 0 and 1
+    private float lastStrikeTime = -100;
 
     IEnumerator Strike()
     {
+        yield return new WaitForSeconds(lastStrikeTime + strikeRate - Time.time);
         for (;;) {
             float dice = Random.Range(0, 1f);
             if (dice < strikeChance) {
@@ -18,6 +20,7 @@ public class Boss : BaseCharacter
                 world.events.resumeEvent.AddListener(strike.GetComponent<BaseStrike>().Resume);
                 world.events.gameOverEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
             }
+            lastStrikeTime = Time.time;
             yield return new WaitForSeconds(strikeRate);
         }
     }

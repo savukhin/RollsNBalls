@@ -276,7 +276,7 @@ Transform:
   m_Children:
   - {fileID: 1597249565}
   m_Father: {fileID: 197884123}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &94635565
 SphereCollider:
@@ -303,11 +303,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0e05839cc1bff4d8eee0f84e9a4b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strikePrefab: {fileID: 782045497945094659, guid: 20fda41865c187c4484a7a81ce4cb66f, type: 3}
-  healthPoints: 0
-  model: {fileID: 0}
-  world: {fileID: 2037390398}
-  mainCamera: {fileID: 963194225}
   radius: 5
 --- !u!54 &94635567
 Rigidbody:
@@ -563,12 +558,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 963194228}
   - {fileID: 1135379016}
   - {fileID: 94635564}
   - {fileID: 1490931239}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &197884124
 MonoBehaviour:
@@ -582,9 +576,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1547771b6b1b6f84dae4aa3646812a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  car: {fileID: 1135379017}
-  ball: {fileID: 94635566}
-  plane: {fileID: 1490931242}
+  events:
+    takeDamageEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    healEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  strikePrefab: {fileID: 782045497945094659, guid: 20fda41865c187c4484a7a81ce4cb66f, type: 3}
+  maxHealthPoints: 3
+  model: {fileID: 0}
+  world: {fileID: 2037390398}
+  mainCamera: {fileID: 963194225}
+  carPrefab: {fileID: 6767365656426889510, guid: 19199e0657637ac4787c758fe0d17375, type: 3}
+  ballPrefab: {fileID: 6658058060125879152, guid: 2b157bb850da7974cbc3f02492484bbf, type: 3}
+  planePrefab: {fileID: 6311824281389709022, guid: abbf94782926f034fa9c31e18340988b, type: 3}
+  controller: {fileID: 0}
+  moneyPoints: 0
 --- !u!1 &220982552
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,7 +688,7 @@ RectTransform:
   - {fileID: 780091274}
   - {fileID: 1706156237}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1335,7 +1343,7 @@ Transform:
   m_Children:
   - {fileID: 1464969652631812175}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &710215625
 MonoBehaviour:
@@ -1349,12 +1357,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1551628f1b9da034ca293d2c085f139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  events:
+    takeDamageEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    healEvent:
+      m_PersistentCalls:
+        m_Calls: []
   strikePrefab: {fileID: 5047463378227086568, guid: e92d83a57867e97409ac14464f2d8b6c, type: 3}
-  healthPoints: 10
+  maxHealthPoints: 0
   model: {fileID: 2242597518718853877}
   world: {fileID: 2037390398}
-  strikeRate: 1000
-  strikeChance: 0.5
+  strikeRate: 1
+  strikeChance: 1
 --- !u!65 &710215626
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2113,8 +2128,8 @@ Transform:
   m_LocalPosition: {x: -0.15017653, y: 5.2799997, z: -7.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 197884123}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 6.888, y: 0, z: 0}
 --- !u!1 &963878017
 GameObject:
@@ -2618,7 +2633,7 @@ Transform:
   m_Children:
   - {fileID: 2034794193}
   m_Father: {fileID: 197884123}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1135379017
 MonoBehaviour:
@@ -2632,11 +2647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ac29d17f000f249a114fd9ead3d730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strikePrefab: {fileID: 782045497945094659, guid: 20fda41865c187c4484a7a81ce4cb66f, type: 3}
-  healthPoints: 0
-  model: {fileID: 0}
-  world: {fileID: 2037390398}
-  mainCamera: {fileID: 963194225}
 --- !u!65 &1135379018
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3141,7 +3151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1490931239
 Transform:
   m_ObjectHideFlags: 0
@@ -3155,7 +3165,7 @@ Transform:
   m_Children:
   - {fileID: 1012299454}
   m_Father: {fileID: 197884123}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1490931240
 BoxCollider:
@@ -3198,11 +3208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26bc0321a73db754191d27391de7ef4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strikePrefab: {fileID: 782045497945094659, guid: 20fda41865c187c4484a7a81ce4cb66f, type: 3}
-  healthPoints: 0
-  model: {fileID: 0}
-  world: {fileID: 2037390398}
-  mainCamera: {fileID: 963194225}
 --- !u!1 &1492867175
 GameObject:
   m_ObjectHideFlags: 0
@@ -3804,7 +3809,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1949661362
 MonoBehaviour:
@@ -4232,7 +4237,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2037390398
 MonoBehaviour:
@@ -4453,12 +4458,12 @@ MonoBehaviour:
           m_CallState: 2
   player: {fileID: 197884124}
   boss: {fileID: 710215625}
-  gameMode: 1
+  gameMode: 2
   generator: {fileID: 2037390396}
   HUD: {fileID: 780091270}
   mainMenu: {fileID: 1950551350}
   gameOverBanner: {fileID: 1706156236}
-  maxHealthPoints: 3
+  maxPlayerHealthPoints: 3
   moneyPoints: 0
   score: 0
 --- !u!65 &2037390399
