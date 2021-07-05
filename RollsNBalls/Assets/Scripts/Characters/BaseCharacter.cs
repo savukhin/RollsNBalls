@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BaseCharacter : MonoBehaviour
 {
+    public GameObject strikePrefab;
+    public int healthPoints;
     public GameObject model;
     public generalWorld world;
     // Start is called before the first frame update

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Boss : BaseCharacter
 {
-    public GameObject strikePrefab;
     public float strikeRate;
     public float strikeChance; // value between 0 and 1
 
@@ -14,7 +13,7 @@ public class Boss : BaseCharacter
             float dice = Random.Range(0, 1f);
             if (dice < strikeChance) {
                 var strike = Instantiate(strikePrefab);
-                strike.GetComponent<BaseStrike>().Launch(transform, world.gameMode);
+                strike.GetComponent<BaseStrike>().Launch(transform, world.gameMode, null);
                 world.events.pauseEvent.AddListener(strike.GetComponent<BaseStrike>().Pause);
                 world.events.resumeEvent.AddListener(strike.GetComponent<BaseStrike>().Resume);
                 world.events.gameOverEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);

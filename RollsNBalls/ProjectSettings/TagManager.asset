@@ -7,6 +7,9 @@ TagManager:
   - Obstacle
   - Ground
   - Stage Object
+  - Boss
+  - Player Missle
+  - Boss Missle
   layers:
   - Default
   - TransparentFX

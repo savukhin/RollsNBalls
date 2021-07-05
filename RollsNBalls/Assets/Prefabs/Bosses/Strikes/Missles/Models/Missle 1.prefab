@@ -28,6 +28,10 @@ MonoBehaviour:
   onBump:
     m_PersistentCalls:
       m_Calls: []
+  tagAffects:
+  - Player
+  - Ground
+  - Player Missle
 --- !u!1001 &677931472922851815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41,7 +45,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5762324421446411916, guid: 4b72a2ad20fff5e47836176ee50af8e1, type: 3}
       propertyPath: m_TagString
-      value: Obstacle
+      value: Boss Missle
       objectReference: {fileID: 0}
     - target: {fileID: 8732256084620057577, guid: 4b72a2ad20fff5e47836176ee50af8e1, type: 3}
       propertyPath: m_RootOrder

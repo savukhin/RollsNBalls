@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Strike1 : BaseStrike
+public class BossStrike1 : BaseStrike
 {
     public float strikeDelay = 0.5f;
     public GameObject spotPointPrefab;
@@ -11,9 +11,9 @@ public class Strike1 : BaseStrike
     private GameObject missle2;
     private GameObject spot;
     
-    public override void Launch(Transform from, gameModesEnum gameMode)
+    public override void Launch(Transform from, gameModesEnum gameMode, GameObject target)
     {
-        base.Launch(from, gameMode);
+        base.Launch(from, gameMode, target);
         missle1 = Instantiate(modelPrefab, from.position, Quaternion.Euler(-90, 0, 0));
         var rigidbody = missle1.AddComponent(typeof(Rigidbody)) as Rigidbody;
         rigidbody.AddForce(new Vector3(0, 50, 0), ForceMode.Impulse);

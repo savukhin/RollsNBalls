@@ -5,6 +5,7 @@ using UnityEngine;
 public class Missle1 : MonoBehaviour
 {
     public UnityEngine.Events.UnityEvent onBump;
+    public List<string> tagAffects;
 
     private Vector3 _pausedVelocity;
     private Vector3 _pausedAngularVelocity;
@@ -30,7 +31,8 @@ public class Missle1 : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.tag != "Obstacle")
+        print("Collider" + collider);
+        if (tagAffects.Contains(collider.tag))
             onBump.Invoke();
     }
 }

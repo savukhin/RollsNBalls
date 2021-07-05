@@ -82,6 +82,12 @@ public class generalWorld : MonoBehaviour
             gameOver();
     }
 
+    public void heal(int count=1)
+    {
+        healthPoints += count;
+        HUD.GetComponent<HUDController>().updateHealthPoints(healthPoints);
+    }
+
     public void takeMoney(int money=1)
     {
         moneyPoints += money;

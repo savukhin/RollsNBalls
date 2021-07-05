@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 4204965760500011035}
   m_Layer: 0
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 4204965760810298970}
   m_Layer: 0
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 493789094948839230}
   m_Layer: 0
   m_Name: Car Stage 1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 4204965761585019198}
   m_Layer: 0
   m_Name: Middle
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -377,6 +377,10 @@ PrefabInstance:
       value: Obstacle 1 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2
       objectReference: {fileID: 0}
@@ -389,6 +393,10 @@ PrefabInstance:
       value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -399,14 +407,6 @@ PrefabInstance:
     - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -439,6 +439,10 @@ PrefabInstance:
       value: Obstacle 1
       objectReference: {fileID: 0}
     - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -451,6 +455,10 @@ PrefabInstance:
       value: -7.91
       objectReference: {fileID: 0}
     - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -461,14 +469,6 @@ PrefabInstance:
     - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6397741334121221986, guid: d53e14b6d2bc79944b0a86374c0066d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

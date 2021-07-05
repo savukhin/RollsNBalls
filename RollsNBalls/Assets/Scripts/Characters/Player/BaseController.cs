@@ -21,7 +21,27 @@ public class BaseController : BaseCharacter
                 break;
             case "Stage Object":
                 if (collider.GetComponent<Coin>() != null)
+                {
                     world.takeMoney(collider.GetComponent<Coin>().cost);
+                }
+                else if (collider.GetComponent<Effect>() != null)
+                {
+                    var effect = collider.GetComponent<Effect>();
+                    switch (effect.type)
+                    {
+                        case EffectTypesEnum.Heal:
+                            world.heal(effect.multiper);
+                            break;
+                        case EffectTypesEnum.Attack:
+                            print("Switching " + effect.type);
+                            var strike = Instantiate(strikePrefab);
+                            strike.GetComponent<BaseStrike>().Launch(transform, world.gameMode, world.boss.gameObject);
+                            world.events.pauseEvent.AddListener(strike.GetComponent<BaseStrike>().Pause);
+                            world.events.resumeEvent.AddListener(strike.GetComponent<BaseStrike>().Resume);
+                            world.events.gameOverEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
+                            break;
+                    }
+                }
                 break;
           default:
               break;

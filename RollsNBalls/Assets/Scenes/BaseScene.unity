@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 94635567}
   m_Layer: 0
   m_Name: Ball Controller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -303,6 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0e05839cc1bff4d8eee0f84e9a4b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strikePrefab: {fileID: 782045497945094659, guid: 20fda41865c187c4484a7a81ce4cb66f, type: 3}
+  healthPoints: 0
   model: {fileID: 0}
   world: {fileID: 2037390398}
   mainCamera: {fileID: 963194225}
@@ -1312,9 +1314,10 @@ GameObject:
   m_Component:
   - component: {fileID: 710215624}
   - component: {fileID: 710215625}
+  - component: {fileID: 710215626}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1346,11 +1349,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1551628f1b9da034ca293d2c085f139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strikePrefab: {fileID: 5047463378227086568, guid: e92d83a57867e97409ac14464f2d8b6c, type: 3}
+  healthPoints: 10
   model: {fileID: 2242597518718853877}
   world: {fileID: 2037390398}
-  strikePrefab: {fileID: 5047463378227086568, guid: e92d83a57867e97409ac14464f2d8b6c, type: 3}
-  strikeRate: 2
+  strikeRate: 1000
   strikeChance: 0.5
+--- !u!65 &710215626
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710215623}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 12, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &756621443
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,6 +1679,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modelPrefab: {fileID: 0}
   gameMode: 0
+  target: {fileID: 0}
   strikeDelay: 0.5
   spotPointPrefab: {fileID: 0}
   spotLinePrefab: {fileID: 0}
@@ -2582,7 +2600,7 @@ GameObject:
   - component: {fileID: 1135379018}
   m_Layer: 0
   m_Name: Car Controller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2614,6 +2632,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ac29d17f000f249a114fd9ead3d730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strikePrefab: {fileID: 782045497945094659, guid: 20fda41865c187c4484a7a81ce4cb66f, type: 3}
+  healthPoints: 0
   model: {fileID: 0}
   world: {fileID: 2037390398}
   mainCamera: {fileID: 963194225}
@@ -3117,7 +3137,7 @@ GameObject:
   - component: {fileID: 1490931242}
   m_Layer: 0
   m_Name: Plane Controller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3178,6 +3198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26bc0321a73db754191d27391de7ef4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strikePrefab: {fileID: 782045497945094659, guid: 20fda41865c187c4484a7a81ce4cb66f, type: 3}
+  healthPoints: 0
   model: {fileID: 0}
   world: {fileID: 2037390398}
   mainCamera: {fileID: 963194225}
@@ -4431,7 +4453,7 @@ MonoBehaviour:
           m_CallState: 2
   player: {fileID: 197884124}
   boss: {fileID: 710215625}
-  gameMode: 2
+  gameMode: 1
   generator: {fileID: 2037390396}
   HUD: {fileID: 780091270}
   mainMenu: {fileID: 1950551350}
