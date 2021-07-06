@@ -84,7 +84,7 @@ public class generalWorld : MonoBehaviour
     IEnumerator ScoreUpdate() {
         for (;;) {
             score++;
-            generator.speed += 0.1f;
+            generator.speed = Mathf.Min(generator.maxSpeed, generator.speed + generator.deltaSpeed);
             HUD.GetComponent<HUDController>().updateScore(score);
             yield return new WaitForSeconds(0.1f);
         }
@@ -108,6 +108,19 @@ public class generalWorld : MonoBehaviour
 
     public void restart() 
     {
+        int ind = (((int)gameMode) - 1 + UnityEngine.Random.Range(1, 3)) % 3 + 1;
+        switch (ind)
+        {
+            case 1:
+                gameMode = gameModesEnum.Ball;
+                break;
+            case 2:
+                gameMode = gameModesEnum.Car;
+                break;
+            case 3:
+                gameMode = gameModesEnum.Plane;
+                break;
+        }
         Start();
         events.restartEvent.Invoke();
     }

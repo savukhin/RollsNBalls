@@ -26,6 +26,8 @@ public class mapGeneration : MonoBehaviour
     public float startSpeed = 4f;
     [System.NonSerialized]
     public float speed = 4f;
+    public float deltaSpeed = 0.1f;
+    public float maxSpeed = 0.1f;
     [System.NonSerialized]
     public bool pause = true;
     public float gateChance = 0.1f;
@@ -37,6 +39,11 @@ public class mapGeneration : MonoBehaviour
         //currentStage = Instantiate(startStagePrefab, new Vector3(0, 0, 10), startStagePrefab.transform.rotation);
         speed = startSpeed;
         initializeGeneration();
+    }
+    
+    void Start()
+    {
+        speed = startSpeed;
     }
 
     public void stop()

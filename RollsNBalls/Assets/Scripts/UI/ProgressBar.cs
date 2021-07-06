@@ -13,8 +13,11 @@ public class ProgressBar : MonoBehaviour
     private void refresh()
     {
         var width = bar.GetComponent<RectTransform>().rect.width * bar.GetComponent<RectTransform>().localScale.x;
+        progress.GetComponent<RectTransform>().sizeDelta = new Vector2(
+                                bar.GetComponent<RectTransform>().rect.width,
+                                bar.GetComponent<RectTransform>().rect.height);
         progress.transform.localScale = new Vector3(current / max, 1f, 1f);
-        progress.transform.localPosition = new Vector3(-width / 2 + current / max / 2f * width, 0f, 0f);
+        progress.transform.localPosition = new Vector3(-width / 2f + current / max / 2f * width, 0f, 0f);
     }
 
     public void setValue(float value)

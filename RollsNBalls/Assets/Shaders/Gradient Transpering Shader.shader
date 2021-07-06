@@ -6,7 +6,7 @@ Shader "Unlit/Gate Shader"
     }
     SubShader
     {
-        Tags { "Queue"="Transperent" "RenderType"="Transperent" }
+        Tags { "Queue"="Transparent" "RenderType"="Transperent" }
         LOD 100
 
         ZWrite Off
