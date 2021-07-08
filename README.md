@@ -13,12 +13,8 @@ It is runner. The main ojective is to defeat boss and try not to face an obstacl
 3. Plane
 - Character is the cylinder-type object which moves in closed space up, down, left and right
 
-Demo slides:
-<p style="height: 340px"> 
-    <img src="./Readme Images/Ball Demo.jpg" title="Ball">
-    <img src="./Readme Images/Car Demo.jpg" title="Car">
-    <img src="./Readme Images/Plane Demo.jpg" title="Plane">
-</p>
+Demo slides (Ball, Car, Plane):
+<img src="./Readme Images/Demo.png" title="Ball, Car and Plane">
 
 Also added music Radio (several music). When music changes, appears a box with title and author (see third slide)
 
@@ -28,19 +24,12 @@ The main difference from others runner - there is a boss which strikes. And play
 ## Shop
 There is a shop. You can buy different models to each game mode.
 
-<p style="height: 340px"> 
-    <img src="./Readme Images/Shop not bought.jpg">
-    <img src="./Readme Images/Shop bought.jpg">
-</p>
+<img src="./Readme Images/Shop.png">
 
 ## Tutorial
 There is a tutorial when you first run the game. You can close game application, open it again, and start tutorial again.
 
-<p style="height: 340px"> 
-    <img src="./Readme Images/Tutorial 1.jpg">
-    <img src="./Readme Images/Tutorial 2.jpg">
-    <img src="./Readme Images/Tutorial 3.jpg">
-</p>
+<img src="./Readme Images/Tutorial.png">
 
 ## Credits
 The whole project wath made by [me](https://github.com/savukhin)
