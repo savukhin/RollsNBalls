@@ -9,6 +9,7 @@ public class HUDController : MonoBehaviour
     public Text[] MoneyText;
     public Text[] ScoreText;
     public Text[] MaxScoreText;
+    public GameObject TutorialPanel;
     public ProgressBar BossHPbar;
 
     public void updateHealthPoints(int healthPoints) {
@@ -37,5 +38,17 @@ public class HUDController : MonoBehaviour
 
     public void updateBossMaxHealthPoints(int healthPoints) {
         BossHPbar.setMaxValue(healthPoints);
+    }
+
+    private void HideTutorialPanel()
+    {
+        TutorialPanel.SetActive(false);
+    }
+
+    public void TutorialWrite(string value, float duration)
+    {
+        TutorialPanel.SetActive(true);
+        TutorialPanel.GetComponentInChildren<Text>().text = value;
+        Invoke("HideTutorialPanel", duration);
     }
 }

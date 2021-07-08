@@ -49,11 +49,16 @@ public class generalWorld : MonoBehaviour
         player.startMoving();
         playerHealthPoints = maxPlayerHealthPoints;
         updateHUD();
-        generator.pause = false;
+        //generator.pause = false;
+        generator.resume();
         HUD.SetActive(true);
         mainMenu.SetActive(false);
         boss.Activate();
         StartCoroutine("ScoreUpdate");
+        if (!saveManager.LoadPassedTutorial())
+        {
+            StartCoroutine("Tutorial");
+        }
     }
 
     public void pause()
@@ -64,6 +69,8 @@ public class generalWorld : MonoBehaviour
     }
     public void resume()
     {
+        if (!generator.tutorial)
+            boss.Activate();
         events.resumeEvent.Invoke();
         StartCoroutine("ScoreUpdate");
         Time.timeScale = 1;
@@ -71,6 +78,12 @@ public class generalWorld : MonoBehaviour
 
     public void gameOver()
     {
+        if (generator.tutorial)
+        {
+            player.Revive();
+            updateHUD();
+            return;
+        }
         events.gameOverEvent.Invoke();
         saveManager.SaveMoney(player.moneyPoints);
         if (score > saveManager.LoadRecordScore())
@@ -91,6 +104,7 @@ public class generalWorld : MonoBehaviour
     {
         events.exitEvent.Invoke();
         StopCoroutine("ScoreUpdate");
+        StopCoroutine("Tutorial");
     }
 
     public void updateHUD()
@@ -105,7 +119,6 @@ public class generalWorld : MonoBehaviour
     IEnumerator ScoreUpdate() {
         for (;;) {
             score++;
-            generator.speed = Mathf.Min(generator.maxSpeed, generator.speed + generator.deltaSpeed);
             HUD.GetComponent<HUDController>().updateScore(score);
             yield return new WaitForSeconds(0.1f);
         }
@@ -113,6 +126,8 @@ public class generalWorld : MonoBehaviour
 
     public void changeGameMode(gameModesEnum mode)
     {
+        if (generator.tutorial)
+            return;
         events.changeGameModeEvent.Invoke();
         this.gameMode = mode;
         generator.changeGameMode(mode);
@@ -121,6 +136,9 @@ public class generalWorld : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        generator.maxSpeed = 40f;
+        player.maxHealthPoints = 3;
+        player.maxHealthPoints = 3;
         GameObject find(Model[] from, string name)
         {
             foreach (var item in from)
@@ -139,11 +157,54 @@ public class generalWorld : MonoBehaviour
         
         generator.gameMode = gameMode;
         player.changeGameMode(gameMode);
-        generator.initializeGeneration();
+        //generator.initializeGeneration();
         player.moneyPoints = saveManager.LoadMoney();
         HUD.GetComponent<HUDController>().updateMaxScore(saveManager.LoadRecordScore());
+        if (!saveManager.LoadPassedTutorial())
+            generator.generateTutorial();
+        else
+            generator.cancelTutorial();
         updateHUD();
         score = 0;
+    }
+
+    IEnumerator Tutorial()
+    {
+        player.healthPoints = 10;
+        player.maxHealthPoints = 10;
+        updateHUD();
+        generator.maxSpeed = 20f;
+        boss.Stop();
+        yield return new WaitForSeconds(0.5f);
+        HUD.GetComponent<HUDController>().TutorialWrite("It is ball\nYou can move to left and right", 3f);
+        yield return new WaitForSeconds(4.5f);
+        HUD.GetComponent<HUDController>().TutorialWrite("Try not to hit to obstacles", 3f);
+        yield return new WaitForSeconds(5f);
+        HUD.GetComponent<HUDController>().TutorialWrite("It is gate!", 1f);
+        yield return new WaitForSeconds(3f);
+        HUD.GetComponent<HUDController>().TutorialWrite("Now it is a car\nYou can change lines\nJust swipe!", 3f);
+        yield return new WaitForSeconds(6f);
+        HUD.GetComponent<HUDController>().TutorialWrite("If you take damage, you can heal", 3f);
+        yield return new WaitForSeconds(4f);
+        HUD.GetComponent<HUDController>().TutorialWrite("Another gate!", 2f);
+        yield return new WaitForSeconds(3f);
+        HUD.GetComponent<HUDController>().TutorialWrite("And the last, it is a plane\nYou can move\nup, right, left and botom", 4f);
+        yield return new WaitForSeconds(5f);
+        boss.Activate();
+        HUD.GetComponent<HUDController>().TutorialWrite("And this guy can strike to you. Avoid this things!", 3f);
+        yield return new WaitForSeconds(5f);
+        boss.Stop();
+        HUD.GetComponent<HUDController>().TutorialWrite("You can strike back, take this!", 3f);
+        yield return new WaitForSeconds(5f);
+        HUD.GetComponent<HUDController>().TutorialWrite("That's all. Have fun!", 3f);
+        yield return new WaitForSeconds(3f);
+        generator.tutorial = false;
+        generator.maxSpeed = 40f;
+        player.maxHealthPoints = 3;
+        player.maxHealthPoints = 3;
+        updateHUD();
+        saveManager.SavePassedTutorial(true);
+        startGame();
     }
 
     public void restart() 
@@ -163,5 +224,13 @@ public class generalWorld : MonoBehaviour
         }
         Start();
         events.restartEvent.Invoke();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pause();
+        }
     }
 }

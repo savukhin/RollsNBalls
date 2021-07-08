@@ -87,6 +87,11 @@ public class BaseController : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
+        setCamera();
+    }
+
+    public void setCamera()
+    {
         mainCamera.transform.position = new Vector3(-0.15f, 5.28f, -7.94f);
     }
 
@@ -100,5 +105,10 @@ public class BaseController : MonoBehaviour
     protected virtual void Update()
     {
         CameraMovement();
+    }
+
+    public void Reset()
+    {
+
     }
 }

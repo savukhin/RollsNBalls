@@ -78,4 +78,19 @@ public class SaveManager : MonoBehaviour
         }
         return SaveHelper.Deserialize<int>(PlayerPrefs.GetString("SaveRecordScore"));
     }
+
+    public void SavePassedTutorial(bool passed)
+    {
+        PlayerPrefs.SetString("SavePassedTutorial", SaveHelper.Serialize<bool>(passed));
+    }
+
+    public bool LoadPassedTutorial()
+    {
+        if (!PlayerPrefs.HasKey("SavePassedTutorial"))
+        {
+            SavePassedTutorial(false);
+            return LoadPassedTutorial();
+        }
+        return SaveHelper.Deserialize<bool>(PlayerPrefs.GetString("SavePassedTutorial"));
+    }
 }

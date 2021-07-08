@@ -26,6 +26,6 @@ Material:
     m_Floats:
     - _Transperency: 0.077
     m_Colors:
-    - _MainColor: {r: 1, g: 0.0141509175, b: 0.658661, a: 1}
+    - _MainColor: {r: 1, g: 0.015686274, b: 0.024951387, a: 1}
     - _TintColor: {r: 1, g: 0.8399382, b: 0, a: 1}
   m_BuildTextureStacks: []

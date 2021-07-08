@@ -182,7 +182,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 3
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -960,6 +960,7 @@ RectTransform:
   - {fileID: 780091274}
   - {fileID: 1706156237}
   - {fileID: 979681991}
+  - {fileID: 1135938031}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2528,6 +2529,7 @@ MonoBehaviour:
   - {fileID: 733829751}
   MaxScoreText:
   - {fileID: 653221184}
+  TutorialPanel: {fileID: 1135938030}
   BossHPbar: {fileID: 1913512504}
 --- !u!1 &786747972
 GameObject:
@@ -2787,7 +2789,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 3
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -3833,6 +3835,82 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1135938030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1135938031}
+  - component: {fileID: 1135938033}
+  - component: {fileID: 1135938032}
+  m_Layer: 5
+  m_Name: Tutorial Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1135938031
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135938030}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1937731364}
+  m_Father: {fileID: 220982556}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.7}
+  m_AnchorMax: {x: 1, y: 0.85}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1135938032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135938030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7882353}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1135938033
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135938030}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1262653024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5767,6 +5845,85 @@ MonoBehaviour:
   current: 10
   bar: {fileID: 560514290}
   progress: {fileID: 761454403}
+--- !u!1 &1937731363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1937731364}
+  - component: {fileID: 1937731366}
+  - component: {fileID: 1937731365}
+  m_Layer: 5
+  m_Name: Tutorial Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1937731364
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937731363}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1135938031}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1937731365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937731363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 60
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &1937731366
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937731363}
+  m_CullTransparentMesh: 1
 --- !u!1 &1949661360
 GameObject:
   m_ObjectHideFlags: 0
@@ -6139,6 +6296,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3377597aa63e314c84a98987734f9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startSpeed: 5
+  deltaSpeed: 0.1
+  maxSpeed: 40
   carStagesPrefabs:
   - {fileID: 4204965761393728710, guid: e3b7f017ea884fe4082023034f179a4c, type: 3}
   - {fileID: 3529328894845094288, guid: 06e07cf791834f348b4e064b9f032d60, type: 3}
@@ -6148,16 +6308,40 @@ MonoBehaviour:
   planeStagesPrefabs:
   - {fileID: 3907433496218051214, guid: 7feab30ddaddfda429329954f1c20601, type: 3}
   - {fileID: 2518208395492703362, guid: 168f62b120cd80d4288d54de917d9795, type: 3}
-  startCarStagePrefab: {fileID: 8370102610717940871, guid: 4560ccb5f2fe1554bb5cbd8f30f18116, type: 3}
-  startBallStagePrefab: {fileID: 81613423569405125, guid: 36fa20fa70c306a429f58ff06cd55d34, type: 3}
-  startPlaneStagePrefab: {fileID: 3907433496218051214, guid: 7feab30ddaddfda429329954f1c20601, type: 3}
+  - {fileID: 1107448909860935806, guid: 5a127647f905bc349950c3aba2b135e9, type: 3}
+  tutorialSequence:
+  - {fileID: 5514999342017780331, guid: fe7c15e62e2ff184a913416ecc0c8cfa, type: 3}
+  - {fileID: 2704665013287160476, guid: 2887bdcdd94d4a34cb219cca3c6edfab, type: 3}
+  - {fileID: 5514999342017780331, guid: fe7c15e62e2ff184a913416ecc0c8cfa, type: 3}
+  - {fileID: 8294836491437938464, guid: 5144d2b5714b3424a9f719758536e913, type: 3}
+  - {fileID: 4568987008209558213, guid: 07a2d30aa9be8da42b050a3ee96d49d6, type: 3}
+  - {fileID: 4568987008209558213, guid: 07a2d30aa9be8da42b050a3ee96d49d6, type: 3}
+  - {fileID: 4204965761393728710, guid: e3b7f017ea884fe4082023034f179a4c, type: 3}
+  - {fileID: 4568987008209558213, guid: 07a2d30aa9be8da42b050a3ee96d49d6, type: 3}
+  - {fileID: 4568987008209558213, guid: 07a2d30aa9be8da42b050a3ee96d49d6, type: 3}
+  - {fileID: 4967700505517399444, guid: 09c25c4d6af7fbe4ba227278dd08629b, type: 3}
+  - {fileID: 4568987008209558213, guid: 07a2d30aa9be8da42b050a3ee96d49d6, type: 3}
+  - {fileID: 1152984689066930642, guid: 625a17153e7a6e341a5db6aceeaea5d2, type: 3}
+  - {fileID: 1107448909860935806, guid: 5a127647f905bc349950c3aba2b135e9, type: 3}
+  - {fileID: 1107448909860935806, guid: 5a127647f905bc349950c3aba2b135e9, type: 3}
+  - {fileID: 1107448909860935806, guid: 5a127647f905bc349950c3aba2b135e9, type: 3}
+  - {fileID: 1107448909860935806, guid: 5a127647f905bc349950c3aba2b135e9, type: 3}
+  - {fileID: 1107448909860935806, guid: 5a127647f905bc349950c3aba2b135e9, type: 3}
+  - {fileID: 1107448909860935806, guid: 5a127647f905bc349950c3aba2b135e9, type: 3}
+  - {fileID: 1107448909860935806, guid: 5a127647f905bc349950c3aba2b135e9, type: 3}
+  - {fileID: 6172641019695508052, guid: c851fb9009f510744bd3ed9fe94738d0, type: 3}
+  - {fileID: 1107448909860935806, guid: 5a127647f905bc349950c3aba2b135e9, type: 3}
+  - {fileID: 1107448909860935806, guid: 5a127647f905bc349950c3aba2b135e9, type: 3}
+  - {fileID: 6882129409228719114, guid: e9a7900a3dad72147a9c593310d2ce01, type: 3}
+  tutorial: 0
+  startStagePrefabs:
+    car: {fileID: 8370102610717940871, guid: 4560ccb5f2fe1554bb5cbd8f30f18116, type: 3}
+    ball: {fileID: 81613423569405125, guid: 36fa20fa70c306a429f58ff06cd55d34, type: 3}
+    plane: {fileID: 3907433496218051214, guid: 7feab30ddaddfda429329954f1c20601, type: 3}
   gates:
     carGatePrefab: {fileID: 8294836491437938464, guid: 5144d2b5714b3424a9f719758536e913, type: 3}
     ballGatePrefab: {fileID: 6882129409228719114, guid: e9a7900a3dad72147a9c593310d2ce01, type: 3}
     planeGatePrefab: {fileID: 1152984689066930642, guid: 625a17153e7a6e341a5db6aceeaea5d2, type: 3}
-  startSpeed: 5
-  deltaSpeed: 0.1
-  maxSpeed: 40
   gateChance: 0.1
 --- !u!4 &2037390397
 Transform:
@@ -6243,18 +6427,6 @@ MonoBehaviour:
         - m_Target: {fileID: 2037390396}
           m_TargetAssemblyTypeName: mapGeneration, Assembly-CSharp
           m_MethodName: resume
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 710215625}
-          m_TargetAssemblyTypeName: Boss, Assembly-CSharp
-          m_MethodName: Activate
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -6543,6 +6715,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+        - m_Target: {fileID: 1124109973}
+          m_TargetAssemblyTypeName: SaveManager, Assembly-CSharp
+          m_MethodName: SavePassedTutorial
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
         - m_Target: {fileID: 2037390398}
           m_TargetAssemblyTypeName: generalWorld, Assembly-CSharp
           m_MethodName: restart
@@ -6724,7 +6908,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 3
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

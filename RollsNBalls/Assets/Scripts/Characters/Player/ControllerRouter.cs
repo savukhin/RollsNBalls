@@ -62,6 +62,7 @@ public class ControllerRouter : BaseCharacter
         controller = instance.GetComponent<BaseController>();
         controller.mainCamera = mainCamera;
         controller.player = this;
+        controller.setCamera();
     }
 
     public void gameOver()
@@ -122,5 +123,11 @@ public class ControllerRouter : BaseCharacter
     public void restart() {
         changeGameMode(gameMode);
         Start();
+    }
+
+    public void Revive()
+    {
+        changeGameMode(gameMode);
+        healthPoints = maxHealthPoints;
     }
 }

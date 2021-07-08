@@ -152,4 +152,13 @@ public class Shop : MonoBehaviour
         saveManager.SaveChosen(chosenModelNames);
         loadGoods();
     }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneChanger changer = new SceneChanger();
+            changer.ChangeScene("Base Scene");
+        }
+    }
 }

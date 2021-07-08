@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mapGeneration : MonoBehaviour
+public class mapGeneration : BaseMapGenerator
 {
     [System.NonSerialized]
     public gameModesEnum gameMode = gameModesEnum.Ball;
     public GameObject[] carStagesPrefabs;
     public GameObject[] ballStagesPrefabs;
     public GameObject[] planeStagesPrefabs;
-
-    public GameObject startCarStagePrefab;
-    public GameObject startBallStagePrefab;
-    public GameObject startPlaneStagePrefab;
+    public GameObject[] tutorialSequence;
+    private int tutorialSequenceIndex = 0;
+    public bool tutorial = false;
+    
+    [System.Serializable]
+    public class StartStagePrefabs
+    {
+        public GameObject car;
+        public GameObject ball;
+        public GameObject plane;
+    }
+    public StartStagePrefabs startStagePrefabs;
 
     [System.Serializable] public class Gates {
         public GameObject carGatePrefab;
@@ -21,46 +29,31 @@ public class mapGeneration : MonoBehaviour
     }
     [SerializeField] public Gates gates;
 
-    private GameObject currentStage;
-    private GameObject nextStage;
-    public float startSpeed = 4f;
-    [System.NonSerialized]
-    public float speed = 4f;
-    public float deltaSpeed = 0.1f;
-    public float maxSpeed = 0.1f;
-    [System.NonSerialized]
-    public bool pause = true;
     public float gateChance = 0.1f;
 
-    public void restart() {
-        //Destroy(currentStage.gameObject);
-        //Destroy(currentStage);
-        //Destroy(nextStage.gameObject);
-        //currentStage = Instantiate(startStagePrefab, new Vector3(0, 0, 10), startStagePrefab.transform.rotation);
-        speed = startSpeed;
+    public void generateTutorial()
+    {
+        tutorial = true;
         initializeGeneration();
     }
-    
-    void Start()
+
+    public void cancelTutorial()
     {
-        speed = startSpeed;
+        tutorial = false;
+        initializeGeneration();
     }
 
-    public void stop()
-    {
-        pause = true;
-    }
-
-    public void resume() {
-        pause = false;
-    }
-
-    float getStageSize(GameObject stage) {
-        return stage.transform.localScale.z * stage.GetComponent<Collider>().bounds.size.z;
-    }
-
-    void generateRandomStage() {
-        if (Random.Range(0f, 1f) < gateChance)
+    protected override void generateNextStage() {
+        if (tutorial)
+        {
+            tutorialSequenceIndex++;
+            nextStage = Instantiate(tutorialSequence[tutorialSequenceIndex], currentStage.transform.position, currentStage.transform.rotation);
+            if (nextStage.GetComponent<Gate>() != null)
+                nextStage.transform.position += new Vector3(0, 2f, 0);
+            else if (currentStage.GetComponent<Gate>() != null)
+                nextStage.transform.position -= new Vector3(0, 2f, 0);
+        }
+        else if (Random.Range(0f, 1f) < gateChance)
         {
             int ind = (((int)gameMode) - 1 + Random.Range(1, 3)) % 3 + 1;
             switch (ind)
@@ -86,18 +79,6 @@ public class mapGeneration : MonoBehaviour
 
         nextStage.transform.position += new Vector3(0, 0, getStageSize(currentStage) / 2 + getStageSize(nextStage) / 2);
     }
-
-    void moveForward() {
-        if (currentStage.transform.position.z < -getStageSize(currentStage) / 2 - 5) {
-            Destroy(currentStage);
-            currentStage = nextStage;
-            generateRandomStage();
-        }
-        Vector3 direction = new Vector3(0, 0, -1);
-        currentStage.transform.position += direction * speed * Time.deltaTime;
-        nextStage.transform.position += direction * speed * Time.deltaTime;
-    }
-
     
     public void changeGameMode(gameModesEnum mode)
     {
@@ -105,22 +86,21 @@ public class mapGeneration : MonoBehaviour
         initializeGeneration();
     }
 
-    public void initializeGeneration() {
+    public override void initializeGeneration() {
         Destroy(currentStage);
         Destroy(nextStage);
-        if (gameMode == gameModesEnum.Car)
-            currentStage = Instantiate(startCarStagePrefab, new Vector3(0, 0, 10), startCarStagePrefab.transform.rotation);
+        if (tutorial)
+        {
+            tutorialSequenceIndex = 0;
+            currentStage = Instantiate(tutorialSequence[tutorialSequenceIndex], new Vector3(0, 0, 10), 
+                                tutorialSequence[tutorialSequenceIndex].transform.rotation);
+        }
+        else if (gameMode == gameModesEnum.Car)
+            currentStage = Instantiate(startStagePrefabs.car, new Vector3(0, 0, 10), startStagePrefabs.car.transform.rotation);
         else if (gameMode == gameModesEnum.Ball)
-            currentStage = Instantiate(startBallStagePrefab, new Vector3(0, 0, 10), startCarStagePrefab.transform.rotation);
+            currentStage = Instantiate(startStagePrefabs.ball, new Vector3(0, 0, 10), startStagePrefabs.car.transform.rotation);
         else if (gameMode == gameModesEnum.Plane)
-            currentStage = Instantiate(startPlaneStagePrefab, new Vector3(0, 0, 10), startCarStagePrefab.transform.rotation);
-        generateRandomStage();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!pause)
-            moveForward();
+            currentStage = Instantiate(startStagePrefabs.plane, new Vector3(0, 0, 10), startStagePrefabs.car.transform.rotation);
+        generateNextStage();
     }
 }
