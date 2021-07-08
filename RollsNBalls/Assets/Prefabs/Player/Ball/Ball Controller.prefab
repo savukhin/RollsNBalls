@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0e05839cc1bff4d8eee0f84e9a4b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 6658058060753970503}
   radius: 5
 --- !u!135 &6658058060125879158
 SphereCollider:
@@ -93,7 +94,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6658058060753970502
 Transform:
   m_ObjectHideFlags: 0

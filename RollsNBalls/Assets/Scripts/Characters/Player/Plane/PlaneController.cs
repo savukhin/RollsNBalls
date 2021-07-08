@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlaneController : BaseController
 {
+    public float sensitiveX;
+    public float sensitiveY;
     private Vector2 touchPosition;
 
     // Start is called before the first frame update
@@ -32,8 +34,8 @@ public class PlaneController : BaseController
             deltaSwipe.y = Mathf.Max(deltaSwipe.y, -resistance);*/
             
             Vector3 direction = new Vector3(deltaSwipe.x, deltaSwipe.y, 0);
-            direction.x = direction.x * 1.1f;
-            direction.y = direction.y * 0.7f;
+            direction.x = direction.x * sensitiveX;
+            direction.y = direction.y * sensitiveY;
 
             GetComponent<Rigidbody>().velocity = direction;
         }

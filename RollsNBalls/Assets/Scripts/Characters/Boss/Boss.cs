@@ -21,6 +21,7 @@ public class Boss : BaseCharacter
                 world.events.gameOverEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
                 world.events.winEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
                 world.events.changeGameModeEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
+                world.events.exitEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
             }
             lastStrikeTime = Time.time;
             yield return new WaitForSeconds(strikeRate);

@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class ControllerRouter : BaseCharacter
 {
+    public class ChosenModels
+    {
+        public GameObject ball;
+        public GameObject car;
+        public GameObject plane;
+    }
+    public ChosenModels chosenModels = new ChosenModels();
     private gameModesEnum gameMode = gameModesEnum.Ball;
     public GameObject mainCamera;
     public GameObject carPrefab;
@@ -39,12 +46,15 @@ public class ControllerRouter : BaseCharacter
         {
             case gameModesEnum.Ball:
                 instance = Instantiate(ballPrefab, transform);
+                instance.GetComponent<BallController>().setModel(chosenModels.ball);
                 break;
             case gameModesEnum.Car:
                 instance = Instantiate(carPrefab, transform);
+                instance.GetComponent<CarController>().setModel(chosenModels.car);
                 break;
             case gameModesEnum.Plane:
                 instance = Instantiate(planePrefab, transform);
+                instance.GetComponent<PlaneController>().setModel(chosenModels.plane);
                 break;
             default:
                 break;
@@ -88,6 +98,16 @@ public class ControllerRouter : BaseCharacter
         world.events.resumeEvent.AddListener(strike.GetComponent<BaseStrike>().Resume);
         world.events.gameOverEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
         world.events.winEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
+    }
+
+    public void setModels(GameObject ballModelPrefab, GameObject carModelPrefab, GameObject planeModelPrefab)
+    {
+        /*ballPrefab.GetComponent<BallController>().changeModel(ballModelPrefab);
+        carPrefab.GetComponent<CarController>().changeModel(carModelPrefab);
+        planePrefab.GetComponent<PlaneController>().changeModel(carModelPrefab);*/
+        chosenModels.ball = ballModelPrefab;
+        chosenModels.car = carModelPrefab;
+        chosenModels.plane = planeModelPrefab;
     }
 
     // Start is called before the first frame update

@@ -19,8 +19,17 @@ public class generalWorld : MonoBehaviour
         public UnityEngine.Events.UnityEvent winEvent;
         public UnityEngine.Events.UnityEvent restartEvent;
         public UnityEngine.Events.UnityEvent changeGameModeEvent;
+        public UnityEngine.Events.UnityEvent exitEvent;
+    }
+    [Serializable]
+    public struct AllModels {
+        public Model[] balls;
+        public Model[] cars;
+        public Model[] planes;
     }
     public Events events;
+    public AllModels allModels;
+
     public ControllerRouter player;
     public Boss boss;
     //[System.NonSerialized]
@@ -32,8 +41,9 @@ public class generalWorld : MonoBehaviour
     public GameObject gameOverBanner;
     public int maxPlayerHealthPoints = 3;
     private int playerHealthPoints; 
-    public int moneyPoints = 0;
+    //public int moneyPoints = 0;
     public int score = 0;
+    public SaveManager saveManager;
 
     public void startGame() {
         player.startMoving();
@@ -52,7 +62,6 @@ public class generalWorld : MonoBehaviour
         StopCoroutine("ScoreUpdate");
         Time.timeScale = 0;
     }
-
     public void resume()
     {
         events.resumeEvent.Invoke();
@@ -63,12 +72,20 @@ public class generalWorld : MonoBehaviour
     public void gameOver()
     {
         events.gameOverEvent.Invoke();
+        saveManager.SaveMoney(player.moneyPoints);
         StopCoroutine("ScoreUpdate");
     }
 
     public void win()
     {
         events.winEvent.Invoke();
+        saveManager.SaveMoney(player.moneyPoints);
+        StopCoroutine("ScoreUpdate");
+    }
+
+    public void exit()
+    {
+        events.exitEvent.Invoke();
         StopCoroutine("ScoreUpdate");
     }
 
@@ -100,9 +117,27 @@ public class generalWorld : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject find(Model[] from, string name)
+        {
+            foreach (var item in from)
+            {
+                if (item.modelName == name)
+                    return item.gameObject;
+            }
+            return null;
+        }
+
+        Shop.Chosen chosen = saveManager.LoadChosen();
+        GameObject ballPrefab = find(allModels.balls, chosen.ball), 
+                    carPrefab = find(allModels.cars, chosen.car), 
+                    planePrefab = find(allModels.planes, chosen.plane);
+        player.setModels(ballPrefab, carPrefab, planePrefab);
+        
         generator.gameMode = gameMode;
         player.changeGameMode(gameMode);
         generator.initializeGeneration();
+        player.moneyPoints = saveManager.LoadMoney();
+        updateHUD();
         score = 0;
     }
 

@@ -7,6 +7,7 @@ public class BaseController : MonoBehaviour
     [System.NonSerialized] public ControllerRouter player;
     [System.NonSerialized] public GameObject mainCamera;
     protected bool isGrounded;
+    public GameObject model;
 
     public virtual void stopMoving() {
         this.enabled = false;
@@ -20,6 +21,13 @@ public class BaseController : MonoBehaviour
     {
         //world.gameOver();
         player.gameOver();
+    }
+
+    public void setModel (GameObject prefab)
+    {
+        if (model)
+            Destroy(model);
+        model = Instantiate(prefab, transform);
     }
 
     public void OnTriggerEnter(Collider collider)
