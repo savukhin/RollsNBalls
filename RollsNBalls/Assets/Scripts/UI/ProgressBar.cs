@@ -32,4 +32,9 @@ public class ProgressBar : MonoBehaviour
         max = value;
         refresh();
     }
+
+    void Start()
+    {
+        refresh();
+    }
 }

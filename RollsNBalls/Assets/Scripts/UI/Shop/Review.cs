@@ -21,6 +21,7 @@ public class Review : MonoBehaviour
         if (model)
             Destroy(model);
         model = Instantiate(prefab, rotator.transform);
+        model.transform.localScale *= 10;
         nameText.text = model.GetComponent<Model>().modelName;
         descriptionText.text = model.GetComponent<Model>().description;
         priceText.text = "Price: " + model.GetComponent<Model>().price;

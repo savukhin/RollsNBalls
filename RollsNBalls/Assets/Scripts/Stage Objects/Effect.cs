@@ -14,6 +14,8 @@ public class Effect : MonoBehaviour
     public int multiper = 1;
     void OnTriggerEnter(Collider collider) {
         if (collider.tag == "Player")
+        {
             Destroy(gameObject);
+        }
     }
 }

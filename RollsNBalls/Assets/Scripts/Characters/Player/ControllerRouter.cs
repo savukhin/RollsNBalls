@@ -99,6 +99,7 @@ public class ControllerRouter : BaseCharacter
         world.events.resumeEvent.AddListener(strike.GetComponent<BaseStrike>().Resume);
         world.events.gameOverEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
         world.events.winEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
+        world.events.exitEvent.AddListener(strike.GetComponent<BaseStrike>().Destroy);
     }
 
     public void setModels(GameObject ballModelPrefab, GameObject carModelPrefab, GameObject planeModelPrefab)

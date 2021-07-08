@@ -11,6 +11,9 @@ public class HUDController : MonoBehaviour
     public Text[] MaxScoreText;
     public GameObject TutorialPanel;
     public ProgressBar BossHPbar;
+    public GameObject SongPanel;
+    public Text SongTitleText;
+    public Text SongAuthorText;
 
     public void updateHealthPoints(int healthPoints) {
         for (int i = 0; i < HPText.Length; i++)
@@ -50,5 +53,20 @@ public class HUDController : MonoBehaviour
         TutorialPanel.SetActive(true);
         TutorialPanel.GetComponentInChildren<Text>().text = value;
         Invoke("HideTutorialPanel", duration);
+    }
+
+    private void HideSongPanel()
+    {
+        SongPanel.GetComponent<Fader>().FadeOut();
+//        SongPanel.SetActive(false);
+    }
+
+    public void updateSong(string title, string author)
+    {
+        SongPanel.SetActive(true);
+        SongPanel.GetComponent<Fader>().FadeIn();
+        SongTitleText.text = title;
+        SongAuthorText.text = author;
+        Invoke("HideSongPanel", 2f);
     }
 }

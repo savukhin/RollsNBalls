@@ -16,7 +16,7 @@ public class Place : MonoBehaviour
         if (model)
             Destroy(model);
         model = Instantiate(modelPrefab, transform);
-        model.transform.localScale = new Vector3(10, 10, 10);
+        model.transform.localScale *= 50;
         if (purchased)
             gameObject.GetComponent<Image>().color = Color.green;
         if (chosen)

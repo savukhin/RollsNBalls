@@ -44,6 +44,7 @@ public class generalWorld : MonoBehaviour
     //public int moneyPoints = 0;
     public int score = 0;
     public SaveManager saveManager;
+    public Radio radio;
 
     public void startGame() {
         player.startMoving();
@@ -54,6 +55,7 @@ public class generalWorld : MonoBehaviour
         HUD.SetActive(true);
         mainMenu.SetActive(false);
         boss.Activate();
+        radio.Play();
         StartCoroutine("ScoreUpdate");
         if (!saveManager.LoadPassedTutorial())
         {
@@ -63,12 +65,14 @@ public class generalWorld : MonoBehaviour
 
     public void pause()
     {
+        radio.ChangeVolume(0.3f);
         events.pauseEvent.Invoke();
         StopCoroutine("ScoreUpdate");
         Time.timeScale = 0;
     }
     public void resume()
     {
+        radio.ChangeVolume(1);
         if (!generator.tutorial)
             boss.Activate();
         events.resumeEvent.Invoke();
@@ -78,6 +82,7 @@ public class generalWorld : MonoBehaviour
 
     public void gameOver()
     {
+        radio.ChangeVolume(0.3f);
         if (generator.tutorial)
         {
             player.Revive();
@@ -93,6 +98,7 @@ public class generalWorld : MonoBehaviour
 
     public void win()
     {
+        radio.ChangeVolume(0.3f);
         events.winEvent.Invoke();
         saveManager.SaveMoney(player.moneyPoints);
         if (score > saveManager.LoadRecordScore())
@@ -209,6 +215,7 @@ public class generalWorld : MonoBehaviour
 
     public void restart() 
     {
+        radio.Stop();
         int ind = (((int)gameMode) - 1 + UnityEngine.Random.Range(1, 3)) % 3 + 1;
         switch (ind)
         {

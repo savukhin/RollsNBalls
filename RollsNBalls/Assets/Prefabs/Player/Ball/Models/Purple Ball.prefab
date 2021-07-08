@@ -94,6 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2cf8fddb168ef409bb2d925aea9a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 2
+  price: 10
   modelName: EVA-PROTOTYPE-0
   description: It was supposed to be a part of EVA-01 but something gone wrong

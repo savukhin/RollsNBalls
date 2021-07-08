@@ -15,7 +15,7 @@ public class RandomEffect : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.tag != "Obstacle")
+        if (collider.tag == "Player")
             Destroy(gameObject);
     }
 }
