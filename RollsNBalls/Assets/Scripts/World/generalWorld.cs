@@ -73,6 +73,8 @@ public class generalWorld : MonoBehaviour
     {
         events.gameOverEvent.Invoke();
         saveManager.SaveMoney(player.moneyPoints);
+        if (score > saveManager.LoadRecordScore())
+            saveManager.SaveRecordScore(score);
         StopCoroutine("ScoreUpdate");
     }
 
@@ -80,6 +82,8 @@ public class generalWorld : MonoBehaviour
     {
         events.winEvent.Invoke();
         saveManager.SaveMoney(player.moneyPoints);
+        if (score > saveManager.LoadRecordScore())
+            saveManager.SaveRecordScore(score);
         StopCoroutine("ScoreUpdate");
     }
 
@@ -137,6 +141,7 @@ public class generalWorld : MonoBehaviour
         player.changeGameMode(gameMode);
         generator.initializeGeneration();
         player.moneyPoints = saveManager.LoadMoney();
+        HUD.GetComponent<HUDController>().updateMaxScore(saveManager.LoadRecordScore());
         updateHUD();
         score = 0;
     }

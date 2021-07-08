@@ -64,5 +64,7 @@ public class BallController : BaseController
     {
         base.Update();
         Joystick();
+        if (Mathf.Abs(transform.position.x) > 2*radius)
+            player.gameOver();
     }
 }
