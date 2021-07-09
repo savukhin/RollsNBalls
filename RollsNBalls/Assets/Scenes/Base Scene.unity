@@ -2639,6 +2639,7 @@ MonoBehaviour:
   SongPanel: {fileID: 520576539}
   SongTitleText: {fileID: 1582798941}
   SongAuthorText: {fileID: 1665328252}
+  PauseMenu: {fileID: 2124051190}
 --- !u!1 &786747972
 GameObject:
   m_ObjectHideFlags: 0

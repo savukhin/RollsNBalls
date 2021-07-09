@@ -237,7 +237,16 @@ public class generalWorld : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pause();
+            if (Time.timeScale == 1)
+            {
+                HUD.GetComponent<HUDController>().pause();
+                pause();
+            }
+            else
+            {
+                HUD.GetComponent<HUDController>().resume();
+                resume();
+            }
         }
     }
 }

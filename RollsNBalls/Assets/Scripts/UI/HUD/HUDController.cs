@@ -14,6 +14,17 @@ public class HUDController : MonoBehaviour
     public GameObject SongPanel;
     public Text SongTitleText;
     public Text SongAuthorText;
+    public GameObject PauseMenu;
+
+    public void pause()
+    {
+        PauseMenu.SetActive(true);
+    }
+
+    public void resume()
+    {
+        PauseMenu.SetActive(false);
+    }
 
     public void updateHealthPoints(int healthPoints) {
         for (int i = 0; i < HPText.Length; i++)
