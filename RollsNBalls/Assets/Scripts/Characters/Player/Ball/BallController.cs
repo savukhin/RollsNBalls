@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallController : BaseController
 {
     public float radius = 5;
+    public float sensitive = 0.009f;
     private Vector2 touchPosition;
     private Vector3 pausedVelocity;
     private Vector3 pausedAngularVelocity;
@@ -55,7 +56,7 @@ public class BallController : BaseController
 
             //Debug.DrawRay(transform.position, transform.TransformDirection(direction) * deltaSwipe / 80f, Color.yellow);
 
-            GetComponent<Rigidbody>().AddForce(direction * deltaSwipe * 3);
+            GetComponent<Rigidbody>().AddForce(direction * deltaSwipe * sensitive, ForceMode.VelocityChange);
         }
     }
 

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Radio : MonoBehaviour
 {
+    public static Radio Instance {get; set;}
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        Instance = this;
+    }
     private AudioSource audioSource;
     public Song[] songs;
     public HUDController HUD;

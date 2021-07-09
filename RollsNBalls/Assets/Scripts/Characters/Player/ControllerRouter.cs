@@ -115,6 +115,8 @@ public class ControllerRouter : BaseCharacter
     // Start is called before the first frame update
     void Start()
     {
+        AudioListener.volume = 1;
+        //mainCamera.GetComponent<AudioListener>().Au
         healthPoints = maxHealthPoints;
         world.updateHUD();
         if (controller)

@@ -76,8 +76,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 0}
-  sensitiveX: 1
-  sensitiveY: 0.7
+  sensitiveX: 0.7
+  sensitiveY: 0.6
 --- !u!1 &6311824283058343493
 GameObject:
   m_ObjectHideFlags: 0

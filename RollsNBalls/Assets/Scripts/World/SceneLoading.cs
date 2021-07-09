@@ -14,6 +14,7 @@ public class SceneLoading : MonoBehaviour
 
     IEnumerator LoadAsyncOperation()
     {
+        yield return new WaitForEndOfFrame();
         AsyncOperation gameLevel = SceneManager.LoadSceneAsync("Base Scene");
         while(gameLevel.progress < 1)
         {

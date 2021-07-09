@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 6658058060753970503}
   radius: 5
+  sensitive: 0.006
 --- !u!135 &6658058060125879158
 SphereCollider:
   m_ObjectHideFlags: 0
